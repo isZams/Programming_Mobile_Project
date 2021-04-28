@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712127643562",
+    "project_id": "book-beach",
+    "storage_bucket": "book-beach.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712127643562:android:463e21d09f8669161fb5d3",
+        "android_client_info": {
+          "package_name": "com.example.programming_mobile_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712127643562-do5fpf15i4cetqikpgrm8k0u2r37mifr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB964C8dMOtfweixned9tf3H6wVHLVeScA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712127643562-do5fpf15i4cetqikpgrm8k0u2r37mifr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
