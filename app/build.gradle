@@ -31,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -48,9 +51,11 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
     implementation 'com.google.firebase:firebase-auth-ktx'
-    //autenticazione
-    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+
 
 
 }
