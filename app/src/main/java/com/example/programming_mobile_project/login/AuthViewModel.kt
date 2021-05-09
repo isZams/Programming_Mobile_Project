@@ -1,11 +1,9 @@
-package com.example.programming_mobile_project.LoginFragment
+package com.example.programming_mobile_project.login
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {

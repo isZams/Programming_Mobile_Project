@@ -57,7 +57,9 @@ dependencies {
 
     //authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    //cardView di material design e recyclerView
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     //database
     implementation 'com.google.firebase:firebase-database-ktx'
