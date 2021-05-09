@@ -1,16 +1,16 @@
-package com.example.programming_mobile_project.LoginFragment
+package com.example.programming_mobile_project.loginFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-
+import com.example.programming_mobile_project.R
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-/*
 class  Login: Fragment(){
 
     private lateinit var auth: FirebaseAuth
@@ -20,7 +20,8 @@ class  Login: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val v = inflater.inflate(R.layout.google_login, container, false)
+        return v
 
         auth = Firebase.auth //inizializza Firebase auth
     }
@@ -36,9 +37,9 @@ class  Login: Fragment(){
     private fun createSignInIntent() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
-           AuthUI.IdpConfig.GoogleBuilder().build())
+            AuthUI.IdpConfig.GoogleBuilder().build())
 
-         Create and launch sign-in intent
+        // Create and launch sign-in intent
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -47,5 +48,3 @@ class  Login: Fragment(){
             RC_SIGN_IN)
     }
 }
-
-*/

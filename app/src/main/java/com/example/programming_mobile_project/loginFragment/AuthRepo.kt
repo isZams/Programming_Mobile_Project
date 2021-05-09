@@ -1,4 +1,4 @@
-package com.example.programming_mobile_project.LoginFragment
+package com.example.programming_mobile_project.loginFragment
 
 import android.content.ContentValues.TAG
 import android.content.Context
