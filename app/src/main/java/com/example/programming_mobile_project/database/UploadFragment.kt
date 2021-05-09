@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.R
 import com.google.android.material.textfield.TextInputLayout
 
@@ -37,8 +39,13 @@ class UploadFragment : Fragment() {
         val insert: TextInputLayout = view.findViewById(R.id.textInputLayout)
         val textView: TextView = view.findViewById(R.id.textView)
         button.setOnClickListener {
-            viewModel.receive()
+            viewModel.upload()
 
+        }
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val caricaButton = view.findViewById<Button>(R.id.button2)
+        caricaButton.setOnClickListener {
+            Glide.with(view).load(viewModel.downloadUrl()).into(imageView)
         }
     }
 }
