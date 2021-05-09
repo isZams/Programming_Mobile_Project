@@ -1,4 +1,4 @@
-package com.example.programming_mobile_project.loginFragment
+package com.example.programming_mobile_project.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
