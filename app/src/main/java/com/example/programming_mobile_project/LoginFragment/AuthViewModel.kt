@@ -17,4 +17,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun signUpWithEmail(email: String, password: String) {
         authRepository.firebaseEmailSignup(email, password, _authenticatedUser, getApplication())
     }
+
+    fun signInWithEmail(email: String, password: String) {
+        authRepository.firebaseEmailSigin(email, password, _authenticatedUser, getApplication())
+    }
 }
