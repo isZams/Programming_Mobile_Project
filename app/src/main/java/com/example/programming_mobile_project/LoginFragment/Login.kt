@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.firebase.ui.auth.AuthUI
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+/*
 class  Login: Fragment(){
 
     private lateinit var auth: FirebaseAuth
@@ -35,9 +36,9 @@ class  Login: Fragment(){
     private fun createSignInIntent() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build())
+           AuthUI.IdpConfig.GoogleBuilder().build())
 
-        // Create and launch sign-in intent
+         Create and launch sign-in intent
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -46,3 +47,5 @@ class  Login: Fragment(){
             RC_SIGN_IN)
     }
 }
+
+*/
