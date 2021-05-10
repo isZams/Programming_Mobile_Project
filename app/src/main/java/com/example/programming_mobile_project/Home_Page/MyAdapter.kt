@@ -27,7 +27,7 @@ class MyAdapter(private val dataSet: Array<String> ): RecyclerView.Adapter<MyAda
     // Create new views (invoked by the layout manager)  //The method creates and initializes the ViewHolder
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.text_row_item, viewGroup, false)  //R.layout_row_item è da sostituire con il layout del singolo elemento della lista che sarà creato con card del material design
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_view, viewGroup, false)  //R.layout_row_item è da sostituire con il layout del singolo elemento della lista che sarà creato con card del material design
         return ViewHolder(view)
     }
 

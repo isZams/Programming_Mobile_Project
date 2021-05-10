@@ -15,56 +15,48 @@
     android:clickable="true"
     card_view:cardElevation="8dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <ImageView
-            android:id="@+id/appImage"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginLeft="16dp"
-            android:scaleType="centerCrop"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/appImage"
-            android:paddingLeft="16sp"
-            android:paddingRight="16dp"
-            android:text="Title"
-            android:textColor="#000"
-            android:textSize="18sp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/CardImgView"/>
 
-        <TextView
-            android:id="@+id/subHeaderText"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TitleText"
-            android:layout_toRightOf="@+id/appImage"
-            android:paddingLeft="16dp"
-            android:text="SubTiltle"
-            android:paddingRight="16dp"
-            android:textColor="#000"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/subHeadingText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subHeaderText"
-            android:layout_toRightOf="@+id/appImage"
-            android:gravity="left"
-            android:lines="5"
-            android:maxLines="5"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:text="stories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detailstories_detail"
-            android:textColor="#737078"
-            android:textSize="14sp"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:id="@+id/CardTitle"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/sottotitolo"
+                android:id="@+id/CardSubtitle"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/descrizione"
+                android:id="@+id/CardDesc"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
