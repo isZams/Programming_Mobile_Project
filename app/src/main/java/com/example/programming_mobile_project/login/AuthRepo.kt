@@ -10,8 +10,8 @@ import com.google.firebase.auth.FirebaseUser
 
 class AuthRepo {
     private val auth = FirebaseAuth.getInstance()
-
     fun isLogged(): Boolean = auth.currentUser != null
+
 
     fun firebaseEmailSignup(
         email: String,

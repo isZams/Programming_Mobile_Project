@@ -1,8 +1,12 @@
 package com.example.programming_mobile_project.Home_Page
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.programming_mobile_project.R
 
@@ -11,17 +15,30 @@ class MyAdapter(private val dataSet: Array<String> ): RecyclerView.Adapter<MyAda
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //that contains the layout for an individual item in the list
 
-        /*val textView: TextView
+        lateinit var txtTitle: TextView
+        lateinit var txtDistanza: TextView
+        lateinit var txtDescrizione: TextView
+        lateinit var imgProfilo: ImageView
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.textView)
-
+            txtTitle = view.findViewById(R.id.CardTitle)
+            txtDistanza= view.findViewById(R.id.CardDist)
+            txtDescrizione = view.findViewById(R.id.CardDesc)
+            imgProfilo = view.findViewById(R.id.CardImgView)
+            /*
             view.setOnClickListener {
                 //qua ci andrà messo cosa dovrà fare l'elemento della lista al click dell'utente
-            }
+                val context = view.context
+                val intent = Intent(context, Stabilimento::class.java).apply {
+                    putExtra("IMMAGINE", "uri dell'immagine")
+                    putExtra("TITOLO", txtTitle.text)
+                    putExtra("DESCRIZIONE", txtDescrizione.text)
+                    putExtra("DISTANZA", txtDistanza.text)
+                }
+            }*/
         }
-        */
+
     }
 
     // Create new views (invoked by the layout manager)  //The method creates and initializes the ViewHolder
