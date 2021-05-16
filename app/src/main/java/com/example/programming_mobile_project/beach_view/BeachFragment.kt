@@ -1,3 +1,4 @@
+// Fonte: https://medium.com/@scode43/interactive-svg-image-in-android-app-using-kotlin-and-javascript-6715c16397bb
 package com.example.programming_mobile_project.beach_view
 
 import android.os.Bundle
