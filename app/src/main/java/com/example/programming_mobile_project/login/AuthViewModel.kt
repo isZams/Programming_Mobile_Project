@@ -12,6 +12,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     val authenticatedUser: LiveData<FirebaseUser>
         get() = _authenticatedUser
 
+
     fun signUpWithEmail(email: String, password: String) {
         authRepository.firebaseEmailSignup(email, password, _authenticatedUser, getApplication())
     }

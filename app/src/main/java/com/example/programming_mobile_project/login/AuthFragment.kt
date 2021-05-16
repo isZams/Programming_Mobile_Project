@@ -11,37 +11,39 @@ import com.example.programming_mobile_project.R
 
 class AuthFragment: Fragment(){
 
-    lateinit var txtUsername: EditText
-    lateinit var txtPassword: EditText
-    lateinit var btnAccedi: Button
-    lateinit var btnRegistrati: Button
-    lateinit var email: String
-    lateinit var pw:String
-    lateinit var authModel: AuthViewModel
+    private lateinit var txtUsername: EditText
+    private lateinit var txtPassword: EditText
+    private lateinit var btnAccedi: Button
+    private lateinit var btnRegistrati: Button
+    private lateinit var email: String
+    private lateinit var pw:String
+    private lateinit var authModel: AuthViewModel
 
-    //metodo dove va messo solo inflate
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.google_login, container, false)
-        return v
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
-    //va sviluppata la logica
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-        txtUsername = view.findViewById(R.id.textUsername)
-        txtPassword = view.findViewById(R.id.textPassword)
-        btnAccedi = view.findViewById(R.id.btnAccedi)
-        btnRegistrati = view.findViewById(R.id.btnRegistrati)
-        email = txtUsername.text.toString()
-        pw = txtPassword.text.toString()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val v = inflater.inflate(R.layout.google_login, container, false)
+        txtUsername = v.findViewById(R.id.textUsername)
+        txtPassword = v.findViewById(R.id.textPassword)
+        btnAccedi = v.findViewById(R.id.btnAccedi)
+        btnRegistrati = v.findViewById(R.id.btnRegistrati)
+
 
         btnAccedi.setOnClickListener(){
+            email = txtUsername.text.toString()
+            pw = txtPassword.text.toString()
             authModel.signInWithEmail(email, pw)
         }
 
         btnRegistrati.setOnClickListener(){
+            email = txtUsername.text.toString()
+            pw = txtPassword.text.toString()
             authModel.signUpWithEmail(email, pw)
         }
-
+        return v
     }
 
 }
