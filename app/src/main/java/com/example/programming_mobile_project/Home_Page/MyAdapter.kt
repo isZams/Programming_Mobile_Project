@@ -15,10 +15,10 @@ class MyAdapter(private val dataSet: Array<String> ): RecyclerView.Adapter<MyAda
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //that contains the layout for an individual item in the list
 
-        lateinit var txtTitle: TextView
-        lateinit var txtDistanza: TextView
-        lateinit var txtDescrizione: TextView
-        lateinit var imgProfilo: ImageView
+        var txtTitle: TextView
+        var txtDistanza: TextView
+        var txtDescrizione: TextView
+        var imgProfilo: ImageView
 
         init {
             // Define click listener for the ViewHolder's View.
