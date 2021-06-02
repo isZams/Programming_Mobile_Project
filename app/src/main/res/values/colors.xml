@@ -11,5 +11,6 @@
     <color name="lightPrimary">#B2EBF2</color>
     <color name="primaryColor">#00BCD4</color>
     <color name="accentColor">#FFC107</color>
+    <color name="accentColorDark">#BA8B00</color>
     <color name="dividerColor">#BDBDBD</color>
 </resources>
