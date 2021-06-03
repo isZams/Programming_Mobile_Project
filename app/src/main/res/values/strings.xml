@@ -8,4 +8,7 @@
     <string name="accedi">Accedi</string>
     <string name="registrati">Registrati</string>
     <string name="email">Email</string>
+    <string name="indirizzo">Indirizzo</string>
+    <string name="pubblica">Pubblica</string>
+    <string name="descrizione">Descrizione</string>
 </resources>
