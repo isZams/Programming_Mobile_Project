@@ -15,10 +15,10 @@ class ChaletDB : FirebaseDB() {
     /**
      * Dato l'id dello chalet ritorna lo chalet corrispondente
      * @param chaletKey key dello chalet
-     *
+     * Il valore ottenuto dalla query viene inserito nel LiveData selectedChalet
      */
     fun getChalet(chaletKey: String) {
-        db.getReference().child("chalets").child(chaletKey).get().addOnSuccessListener {
+        db.reference.child("chalets").child(chaletKey).get().addOnSuccessListener {
             Log.i("firebasee", it.child("descrizione").value.toString())
             _selectedChalet.value = Chalet(
                 it.child("locandina").value.toString(),
@@ -29,8 +29,12 @@ class ChaletDB : FirebaseDB() {
         }
     }
 
+
+    /** Aggiunge l'oggeto Chalet al database
+     * @param chalet Lo chalet da aggiungere
+     */
     fun addChalet(chalet: Chalet) {
-        db.getReference().child("chalets").push().setValue(chalet).addOnFailureListener {
+        db.reference.child("chalets").push().setValue(chalet).addOnFailureListener {
             Log.i("firebasee", "Errore ${it}")
         }
     }
