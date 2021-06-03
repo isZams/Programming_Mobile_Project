@@ -1,12 +1,12 @@
 // Fonte: https://medium.com/@scode43/interactive-svg-image-in-android-app-using-kotlin-and-javascript-6715c16397bb
 package com.example.programming_mobile_project.beach_view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.webkit.WebView
-import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,11 +16,13 @@ import com.example.programming_mobile_project.databinding.BeachMapBinding
 
 class BeachFragment : Fragment() {
     private val mapRepo = MapRepo()
+    private lateinit var binding: BeachMapBinding
     val viewModel: BeachViewModel by viewModels()
 
     companion object {
         val BASE_URL = "file:///android_asset/"
         val JAVASCRIPT_OBJ = "Android"
+
     }
 
 
@@ -29,10 +31,12 @@ class BeachFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: BeachMapBinding =
-            DataBindingUtil.inflate(inflater, R.layout.beach_map, container, false)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.beach_map, container, false)
         setUpWebLayout(binding.webView)
+
+
+        //serve per la toolbar
+        setHasOptionsMenu(true)
 
         val file_name = "ombrelloni_balneare.svg"
         val svgString = activity?.assets?.open(file_name)?.bufferedReader()?.readText()
@@ -46,9 +50,26 @@ class BeachFragment : Fragment() {
                 null
             )
         }
+
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.beach_toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.showExtra -> {
+                binding.extra.visibility =
+                    if (binding.extra.visibility == View.GONE) View.VISIBLE else View.GONE
+            }
+        }
+        return true
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
     fun setUpWebLayout(webView: WebView) {
         webView.settings.javaScriptEnabled = true
         webView.settings.builtInZoomControls = true
