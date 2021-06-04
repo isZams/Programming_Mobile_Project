@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.chalet_admin.Chalet
 
+//  https://stackoverflow.com/a/63889166
+//   ^ Le coroutine non sono compatibili con firebase
+
 class ChaletDB : FirebaseDB() {
 
     val _selectedChalet = MutableLiveData<Chalet>()
