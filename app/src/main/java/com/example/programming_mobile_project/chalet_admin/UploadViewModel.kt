@@ -20,8 +20,8 @@ class UploadViewModel : ViewModel() {
         val nome = "G7"
         val indirizzo = "Lungomare de Citanò"
         val descrizione= ""
-        val chalet = Chalet(locandina, nome, indirizzo, descrizione)
-        Log.d("DEB", chalet.toString() + " " + chalet.nome_chalet + " " + chalet.indirizzo)
+        val chalet: Chalet = Chalet(locandina, nome, indirizzo, descrizione)
+        Log.d("DEB", chalet.nome_chalet + " " + chalet.indirizzo)
 
         database.child("chalets").child(id.toString()).setValue(chalet)
         //database.s

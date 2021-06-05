@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
+                android:textSize="20dp"
                 android:id="@+id/CardTitle"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
@@ -43,19 +44,22 @@
                 android:id="@+id/CardDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/descrizione"
+                android:textSize="10dp"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
 
-                <TextView
-                    android:id="@+id/CardInd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/indirizzo"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:layout_marginLeft="260dp"/>
+            <TextView
+                android:id="@+id/CardInd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="240dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/indirizzo"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="8dp" />
 
 
         </LinearLayout>
