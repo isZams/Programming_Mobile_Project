@@ -68,8 +68,6 @@ dependencies {
 
     //database
     implementation 'com.google.firebase:firebase-database-ktx'
-    //firebaseUI
-    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
     //storage
     implementation 'com.google.firebase:firebase-storage-ktx'
     //glide
