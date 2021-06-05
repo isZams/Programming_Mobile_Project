@@ -19,8 +19,10 @@ class Prenotazione(
     val num_sdraie: Int,
     val num_sedie: Int,
     val num_lettini: Int,
-    val key_utente: String
+    val key_utente: String,
+    val key_chalet: String,
 ) {
+    constructor() : this(0, 0, 0, 0, 0, 0, "", "")
 
     fun timeStampToString(timestamp: Long): String {
         return SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN)

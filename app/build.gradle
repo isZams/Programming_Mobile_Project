@@ -68,6 +68,8 @@ dependencies {
 
     //database
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     //storage
     implementation 'com.google.firebase:firebase-storage-ktx'
     //glide

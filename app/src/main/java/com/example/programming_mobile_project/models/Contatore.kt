@@ -5,4 +5,6 @@ data class Contatore(
     val current_sedie:Int,
     val current_lettini:Int,
     val current_sdraie:Int,
-)
+) {
+    constructor() : this(0,0,0)
+}

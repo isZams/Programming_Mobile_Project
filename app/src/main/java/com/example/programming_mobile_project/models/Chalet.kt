@@ -1,4 +1,4 @@
-package com.example.programming_mobile_project.chalet_admin
+package com.example.programming_mobile_project.models
 
 data class Chalet(
     val locandina: String,
