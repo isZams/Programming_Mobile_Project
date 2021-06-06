@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.ElencoPrenotazioniFragmentBinding
 
 class ElencoPrenotazioni : Fragment() {
 
-    var adapter = PrenotazioniAdapter()
     private lateinit var viewModel: ElencoPrenotazioniViewModel
 
     override fun onCreateView(
@@ -28,18 +28,8 @@ class ElencoPrenotazioni : Fragment() {
             )
 
 
-        binding.rvElencoPrenotazioni.adapter = adapter
+        binding.rvElencoPrenotazioni.adapter = PrenotazioniAdapter(viewLifecycleOwner)
 
         return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
     }
 }
