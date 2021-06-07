@@ -9,9 +9,9 @@ import com.google.firebase.firestore.ktx.toObject
 //   ^ Le coroutine non sono compatibili con firebase
 
 class ChaletDB : FirebaseDB() {
-    val chaletRef = db.collection("chalets")
+    private val chaletRef = db.collection("chalets")
 
-    val _selectedChalet = MutableLiveData<Chalet>()
+    private val _selectedChalet = MutableLiveData<Chalet>()
     val selectedChalet: LiveData<Chalet>
         get() = _selectedChalet
 
@@ -29,7 +29,6 @@ class ChaletDB : FirebaseDB() {
             }
             .addOnFailureListener { _selectedChalet.value = Chalet() }
     }
-
     /** Aggiunge l'oggetto Chalet al database
      * @param chalet Lo chalet da aggiungere
      * @return Se lo chalet viene correttamente caricato in selectedChalet viene inserito chalet altrimenti Chalet()
