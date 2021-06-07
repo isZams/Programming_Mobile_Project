@@ -85,6 +85,7 @@ dependencies {
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.32")
 
 
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     //firebase storage
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
@@ -93,6 +94,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     // FirebaseUI Storage only
     implementation 'com.firebaseui:firebase-ui-storage:6.4.0'
-    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+    implementation "com.firebaseui:firebase-ui-auth:6.4.0"
+    implementation "com.firebaseui:firebase-ui-firestore:6.2.1"
 
 }
