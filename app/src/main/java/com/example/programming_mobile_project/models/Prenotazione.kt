@@ -1,7 +1,6 @@
 package com.example.programming_mobile_project.models
 
 import java.sql.Date
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,8 +20,9 @@ class Prenotazione(
     val num_lettini: Int,
     val key_utente: String,
     val key_chalet: String,
+    val tot: Float
 ) {
-    constructor() : this(0, 0, 0, 0, 0, 0, "", "")
+    constructor() : this(0, 0, 0, 0, 0, 0, "", "", 0f)
 
     fun timeStampToString(timestamp: Long): String {
         return SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN)
