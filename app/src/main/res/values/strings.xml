@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Programming_Mobile_Project</string>
-    <string name="descrizione">Descrizione</string>
     <string name="sottotitolo">Sottotitolo</string>
     <string name="title">Title</string>
     <string name="username">Username</string>

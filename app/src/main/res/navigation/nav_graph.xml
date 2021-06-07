@@ -19,6 +19,20 @@
         android:id="@+id/HomePage"
         android:name="com.example.programming_mobile_project.Home_Page.HomePage"
         android:label="HomePage"
-        tools:layout="@layout/home_page"/>
+        tools:layout="@layout/home_page">
+        <action
+            android:id="@+id/action_HomePage_to_chaletFragment"
+            app:destination="@id/chaletFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chaletFragment"
+        android:name="ChaletFragment"
+        android:label="ChaletFragment">
+        <argument
+            android:name="chaletId"
+            app:argType="string"
+            />
+    </fragment>
 
 </navigation>
