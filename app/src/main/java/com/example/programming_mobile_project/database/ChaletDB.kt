@@ -3,15 +3,18 @@ package com.example.programming_mobile_project.database
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Chalet
+import com.example.programming_mobile_project.models.Prenotazione
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 
 //  https://stackoverflow.com/a/63889166
 //   ^ Le coroutine non sono compatibili con firebase
 
 class ChaletDB : FirebaseDB() {
-    private val chaletRef = db.collection("chalets")
+    val chaletRef = db.collection("chalets")
 
-    private val _selectedChalet = MutableLiveData<Chalet>()
+    val _selectedChalet = MutableLiveData<Chalet>()
     val selectedChalet: LiveData<Chalet>
         get() = _selectedChalet
 
@@ -29,6 +32,12 @@ class ChaletDB : FirebaseDB() {
             }
             .addOnFailureListener { _selectedChalet.value = Chalet() }
     }
+
+    //query che prende tutte le info di ogni chalet
+    fun queryChalet(): Query {
+        return chaletRef
+    }
+
     /** Aggiunge l'oggetto Chalet al database
      * @param chalet Lo chalet da aggiungere
      * @return Se lo chalet viene correttamente caricato in selectedChalet viene inserito chalet altrimenti Chalet()
@@ -43,6 +52,7 @@ class ChaletDB : FirebaseDB() {
                 _selectedChalet.value = Chalet()
             }
     }
+
 
 //
 //    /**
