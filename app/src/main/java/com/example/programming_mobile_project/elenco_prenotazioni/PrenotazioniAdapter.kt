@@ -3,7 +3,10 @@ package com.example.programming_mobile_project.elenco_prenotazioni
 import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import com.example.programming_mobile_project.database.ChaletDB
 import com.example.programming_mobile_project.database.PrenotazioneDB
+import com.example.programming_mobile_project.models.Chalet
 import com.example.programming_mobile_project.models.Prenotazione
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -24,6 +27,8 @@ class PrenotazioniAdapter(lifecycleOwner: LifecycleOwner) :
             .build()
     ) {
 
+    private val lifeCyOwn = lifecycleOwner
+
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): PrenotazioniHolder {
         // Create a new instance of the ViewHolder, in this case we are using a custom
         // layout called R.layout.message for each item
@@ -31,8 +36,15 @@ class PrenotazioniAdapter(lifecycleOwner: LifecycleOwner) :
     }
 
     override fun onBindViewHolder(holder: PrenotazioniHolder, position: Int, model: Prenotazione) {
-        holder.binding.txtViewDataTermine.text = model.data_termine_prenotazione.toString()
+        holder.binding.txtViewDataTermine.text =
+            model.timeStampToString(model.timestamp_prenotazione)
         holder.binding.txtViewOmbrellone.text = model.n_ombrellone.toString()
+        val chaletDB = ChaletDB()
+        val observer = Observer<Chalet> {
+            holder.binding.nomeChalet.text = it.nome_chalet
+        }
+        chaletDB._selectedChalet.observe(lifeCyOwn, observer)
+        chaletDB.getChalet(model.key_chalet)
     }
 
     override fun onError(e: FirebaseFirestoreException) {
