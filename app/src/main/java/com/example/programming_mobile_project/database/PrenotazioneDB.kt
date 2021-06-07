@@ -52,7 +52,7 @@ class PrenotazioneDB : FirebaseDB() {
     /**
      *
      * @param key_utente la chiave dell'utente di cui si vuole ottenere le prenotazioni
-     * @return il relativo oggetto[Query]
+     * @return il relativo oggetto [Query]
      */
     fun queryPrenotazioniByUtente(key_utente: String): Query {
         return prenotazioniRef.whereEqualTo("key_utente", key_utente)
