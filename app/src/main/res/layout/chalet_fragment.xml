@@ -79,7 +79,7 @@
                         android:id="@+id/tot_lettini"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,7 +97,7 @@
                         android:id="@+id/tot_ombrelloni"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,7 +115,7 @@
                         android:id="@+id/tot_sdraio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -133,19 +133,25 @@
                         android:id="@+id/tot_sedie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/prenota_giornaliero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="prenota giornaliero"
+                    android:layout_marginTop="8dp"
+                    />
 
+                <Button
+                    android:id="@+id/prenota_mensile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="prenota mensile"
+                    android:layout_marginTop="8dp"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
-
-
-
 </layout>

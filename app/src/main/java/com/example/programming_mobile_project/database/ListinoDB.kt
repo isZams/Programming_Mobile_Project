@@ -9,7 +9,7 @@ import com.google.firebase.firestore.ktx.toObject
 class ListinoDB : FirebaseDB() {
     val listinoRef = db.collection("listini")
 
-    val _selectedListino = MutableLiveData<Listino>()
+    private val _selectedListino = MutableLiveData<Listino>()
     val selectedListino: LiveData<Listino>
         get() = _selectedListino
 
@@ -45,7 +45,6 @@ class ListinoDB : FirebaseDB() {
             }
             .addOnFailureListener { _selectedListino.value = Listino() }
     }
-
 
 
 //    /**
