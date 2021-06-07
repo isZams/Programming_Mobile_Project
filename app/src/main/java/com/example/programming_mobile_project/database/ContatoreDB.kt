@@ -3,7 +3,6 @@ package com.example.programming_mobile_project.database
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Contatore
-import com.google.firebase.database.ServerValue
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.toObject
 
