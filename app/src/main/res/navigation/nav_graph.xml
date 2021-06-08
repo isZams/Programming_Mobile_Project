@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/prenotazione"
-        android:name="com.example.programming_mobile_project.elenco_prenotazioni.Prenotazione"
+        android:name="com.example.programming_mobile_project.elenco_prenotazioni.PrenotazioneFragment"
         android:label="Prenotazione"
         tools:layout="@layout/prenotazione_fragment">
         <argument
