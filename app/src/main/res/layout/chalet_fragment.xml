@@ -49,6 +49,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
+
+
                 <TextView
                     android:id="@+id/descrizione_chalet"
                     android:layout_width="match_parent"
@@ -152,6 +154,15 @@
                     android:layout_marginTop="8dp"
                     />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/bottone_maps"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/material_emphasis_medium"
+                android:text="View Maps"></Button>
         </LinearLayout>
+
     </ScrollView>
 </layout>
