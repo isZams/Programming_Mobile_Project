@@ -1,6 +1,8 @@
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
+
+
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -31,26 +33,37 @@ import com.example.programming_mobile_project.databinding.ChaletFragmentBinding
 import com.example.programming_mobile_project.models.Chalet
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import android.content.Context
+import android.content.Context.*
+import android.location.Geocoder
+import android.os.Looper
+
+import com.google.android.gms.location.*
+import android.content.Context.LOCATION_SERVICE as ContextLOCATION_SERVICE
 
 
 class ChaletFragment : Fragment() {
     val args: ChaletFragmentArgs by navArgs()
     private lateinit var binding: ChaletFragmentBinding
-       val PERMISSION_ID = 42
-      lateinit var mFusedLocationClient: FusedLocationProviderClient
+    val PERMISSION_ID = 42
+    lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        mFusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(this.requireContext())
+
+        getLastLocation()
         val view = inflater.inflate(R.layout.chalet_fragment, container, false)
 
         binding = DataBindingUtil.setContentView(requireActivity(), R.layout.chalet_fragment)
-        
+
         return view
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,7 +105,7 @@ class ChaletFragment : Fragment() {
     }
 
     fun DisplayTrack(start: String, end: String) {
-      try {
+        try {
             //passa il punto di partenza e quello di arrivo alla stringa che verrà caricata in google maps
             val uri: Uri = Uri.parse("https://www.google.co.in/maps/dir" + start + "/" + end)
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
@@ -100,7 +113,7 @@ class ChaletFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
 
-        } catch  (e: ActivityNotFoundException) {
+        } catch (e: ActivityNotFoundException) {
             //se non ci sono app per aprire maps viene rimandato al playstore
             val uri: Uri =
                 Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps")
@@ -111,5 +124,105 @@ class ChaletFragment : Fragment() {
 
     }
 
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
 
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this.requireActivity(),
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            PERMISSION_ID
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION_ID) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                // Granted. Start getting the location information
+            }
+        }
+    }
+
+    fun isLocationEnabled(): Boolean {
+        var locationManager: LocationManager = Context.LOCATION_SERVICE as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+
+
+    @SuppressLint("MissingPermission")
+    private fun getLastLocation(): String {
+        var startPoint = ""
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this.requireActivity()) { task ->
+                    var location: Location = task.result
+                    if (location == null) {
+                        requestNewLocationData()
+                    } else {
+                        startPoint = getAddress(location.latitude, location.longitude)
+
+                    }
+                }
+            } else {
+                Toast.makeText(this.requireContext(), "Turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
+        return startPoint
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun requestNewLocationData() {
+        var mLocationRequest = LocationRequest()
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest.interval = 0
+        mLocationRequest.fastestInterval = 0
+        mLocationRequest.numUpdates = 1
+
+        mFusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(this.requireContext())
+        mFusedLocationClient!!.requestLocationUpdates(
+            mLocationRequest, mLocationCallback,
+            Looper.myLooper()
+        )
+    }
+
+    private val mLocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            var mLastLocation: Location = locationResult.lastLocation
+            getAddress(mLastLocation.latitude, mLastLocation.longitude)
+        }
+    }
+
+    private fun getAddress(lat: Double, lng: Double): String {
+        val geocoder = Geocoder(this.requireContext())
+        val list = geocoder.getFromLocation(lat, lng, 1)
+        return list[0].getAddressLine(0)
+    }
 }
