@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/chaletFragment"
-        android:name="ChaletFragment"
+        android:name="com.example.programming_mobile_project.chalet.ChaletFragment"
         android:label="ChaletFragment"
         tools:layout="@layout/chalet_fragment">
         <argument
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/prenotazione"
-        android:name="com.example.programming_mobile_project.elenco_prenotazioni.Prenotazione"
+        android:name="com.example.programming_mobile_project.elenco_prenotazioni.PrenotazioneFragment"
         android:label="Prenotazione"
         tools:layout="@layout/prenotazione_fragment">
         <argument
