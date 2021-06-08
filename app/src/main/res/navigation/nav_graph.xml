@@ -32,8 +32,25 @@
         tools:layout="@layout/chalet_fragment">
         <argument
             android:name="chaletId"
-            app:argType="string"
-            />
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/elencoPrenotazioni"
+        android:name="com.example.programming_mobile_project.elenco_prenotazioni.ElencoPrenotazioni"
+        android:label="ElencoPrenotazioni"
+        tools:layout="@layout/elenco_prenotazioni_fragment">
+        <action
+            android:id="@+id/action_elencoPrenotazioni_to_prenotazione"
+            app:destination="@id/prenotazione" />
+    </fragment>
+    <fragment
+        android:id="@+id/prenotazione"
+        android:name="com.example.programming_mobile_project.elenco_prenotazioni.Prenotazione"
+        android:label="Prenotazione"
+        tools:layout="@layout/prenotazione_fragment">
+        <argument
+            android:name="keyPrenotazione"
+            app:argType="string" />
     </fragment>
 
 </navigation>

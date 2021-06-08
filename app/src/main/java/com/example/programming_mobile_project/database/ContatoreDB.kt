@@ -9,11 +9,11 @@ import com.google.firebase.firestore.ktx.toObject
 class ContatoreDB : FirebaseDB() {
     val contatoreRef = db.collection("contatori")
 
-    val _response = MutableLiveData<String>()
+    private val _response = MutableLiveData<String>()
     val response: LiveData<String>
         get() = _response
 
-    val _selectedContatore = MutableLiveData<Contatore>()
+    private val _selectedContatore = MutableLiveData<Contatore>()
     val selectedContatore: LiveData<Contatore>
         get() = _selectedContatore
 

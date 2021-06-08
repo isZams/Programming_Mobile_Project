@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.ElencoPrenotazioniFragmentBinding
 
@@ -27,8 +28,9 @@ class ElencoPrenotazioni : Fragment() {
                 false
             )
 
+        binding.rvElencoPrenotazioni.adapter = PrenotazioniAdapter(viewLifecycleOwner, findNavController())
 
-        binding.rvElencoPrenotazioni.adapter = PrenotazioniAdapter(viewLifecycleOwner)
+        (activity as AppCompatActivity).supportActionBar?.title = "Elenco prenotazioni"
 
         return binding.root
     }

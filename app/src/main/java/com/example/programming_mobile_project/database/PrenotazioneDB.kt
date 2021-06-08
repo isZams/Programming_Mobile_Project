@@ -3,6 +3,7 @@ package com.example.programming_mobile_project.database
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.programming_mobile_project.models.Chalet
 import com.example.programming_mobile_project.models.Prenotazione
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
@@ -11,11 +12,11 @@ import com.google.firebase.firestore.ktx.toObjects
 class PrenotazioneDB : FirebaseDB() {
     val prenotazioniRef = db.collection("prenotazioni")
 
-    val _selectedPrenotazione = MutableLiveData<Prenotazione>()
+    private val _selectedPrenotazione = MutableLiveData<Prenotazione>()
     val selectedPrenotazione: LiveData<Prenotazione>
         get() = _selectedPrenotazione
 
-    val _selectedPrenotazioni = MutableLiveData<MutableList<Prenotazione>>()
+    private val _selectedPrenotazioni = MutableLiveData<MutableList<Prenotazione>>()
     val selectedPrenotazioni: LiveData<MutableList<Prenotazione>>
         get() = _selectedPrenotazioni
 
@@ -72,6 +73,20 @@ class PrenotazioneDB : FirebaseDB() {
         }.addOnFailureListener {
             _selectedPrenotazioni.value = mutableListOf()
         }
+    }
+
+    /**
+     * Dato l'id della prenotazione ritorna le info della prenotazione corrispondente
+     * @param key_prenotazione key della prenotazione
+     * @return Il valore ottenuto dalla query viene inserito nel LiveData [selectedPrenotazione]. Se non viene trovato ritorna Prenotazione()
+     */
+    fun getPrenotazione(key_prenotazione: String) {
+        prenotazioniRef.document(key_prenotazione)
+            .get().addOnSuccessListener {
+                // toObject trasforma l'oggetto DocumentSnapshot! (it) in un oggetto della classe indicata
+                _selectedPrenotazione.value = it.toObject<Prenotazione>()
+            }
+            .addOnFailureListener { _selectedPrenotazione.value = Prenotazione() }
     }
 
 }
