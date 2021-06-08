@@ -37,6 +37,7 @@ import android.content.Context
 import android.content.Context.*
 import android.location.Geocoder
 import android.os.Looper
+import android.util.Log
 
 import com.google.android.gms.location.*
 import android.content.Context.LOCATION_SERVICE as ContextLOCATION_SERVICE
@@ -88,26 +89,24 @@ class ChaletFragment : Fragment() {
             binding.totOmbrelloni.text = chalet.tot_ombrelloni.toString()
             binding.totSdraio.text = chalet.tot_sdraio.toString()
             binding.totSedie.text = chalet.tot_sedie.toString()
-            destination = chalet.indirizzo.trim()
+            destination = chalet.indirizzo
         }
 
         chaletDB.selectedChalet.observe(viewLifecycleOwner, chaletObserver)
 
 
-        val startPoint: String = "null".trim()
+        //val startPoint: String = "null".trim()
         val btnMaps: Button = binding.bottoneMaps
         // al click del bottone chiama la funzione displayTraci
         btnMaps.setOnClickListener(View.OnClickListener {
-            fun onClick(v: View) {
-                DisplayTrack(startPoint, destination)
-            }
+                DisplayTrack(getLastLocation(), destination)
         })
     }
 
     fun DisplayTrack(start: String, end: String) {
         try {
             //passa il punto di partenza e quello di arrivo alla stringa che verrà caricata in google maps
-            val uri: Uri = Uri.parse("https://www.google.co.in/maps/dir" + start + "/" + end)
+            val uri: Uri = Uri.parse("https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end)
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setPackage("com.google.android.apps.maps")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -163,7 +162,7 @@ class ChaletFragment : Fragment() {
     }
 
     fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = Context.LOCATION_SERVICE as LocationManager
+        var locationManager: LocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
