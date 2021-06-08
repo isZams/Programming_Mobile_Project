@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/chaletFragment"
-        android:name="ChaletFragment"
+        android:name="com.example.programming_mobile_project.chalet.ChaletFragment"
         android:label="ChaletFragment"
         tools:layout="@layout/chalet_fragment">
         <argument
