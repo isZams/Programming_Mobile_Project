@@ -28,7 +28,8 @@
     <fragment
         android:id="@+id/chaletFragment"
         android:name="ChaletFragment"
-        android:label="ChaletFragment">
+        android:label="ChaletFragment"
+        tools:layout="@layout/chalet_fragment">
         <argument
             android:name="chaletId"
             app:argType="string"

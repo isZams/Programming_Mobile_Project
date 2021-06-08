@@ -3,10 +3,9 @@ package com.example.programming_mobile_project.database
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Chalet
-import com.example.programming_mobile_project.models.Prenotazione
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
+
 
 //  https://stackoverflow.com/a/63889166
 //   ^ Le coroutine non sono compatibili con firebase
@@ -37,6 +36,10 @@ class ChaletDB : FirebaseDB() {
     fun queryChalet(): Query {
         return chaletRef
     }
+    fun getChaletID(chaletKey: String): String{
+        return chaletRef.document(chaletKey).id
+    }
+
 
     /** Aggiunge l'oggetto Chalet al database
      * @param chalet Lo chalet da aggiungere
