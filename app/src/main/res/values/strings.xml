@@ -14,4 +14,13 @@
     <string name="totale_ombrelloni">Tot. ombrelloni</string>
     <string name="totale_sdraie">Tot. sdraie</string>
     <string name="tot_sedie">Tot. sedie</string>
+    <string name="view_maps">View Maps</string>
+    <string name="prenota_mensile">prenota mensile</string>
+    <string name="prenota_giornaliero">prenota giornaliero</string>
+    <string name="sedie">Sedie</string>
+    <string name="sdraio">Sdraio</string>
+    <string name="ombrelloni">Ombrelloni</string>
+    <string name="lettini">Lettini</string>
+    <string name="info">Info</string>
+    <string name="immagine_chalet">immagine_chalet</string>
 </resources>

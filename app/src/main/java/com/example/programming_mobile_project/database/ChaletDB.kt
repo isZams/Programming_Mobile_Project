@@ -36,8 +36,10 @@ class ChaletDB : FirebaseDB() {
     fun queryChalet(): Query {
         return chaletRef
     }
-    fun getChaletID(chaletKey: String): String{
-        return chaletRef.document(chaletKey).id
+
+    fun getChaletID(position: Int){
+
+        chaletRef.whereEqualTo("position", position).get()
     }
 
 

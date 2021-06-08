@@ -14,7 +14,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxHeight="220dp"
-                android:contentDescription="immagine_chalet"
+                android:contentDescription="@string/immagine_chalet"
                 app:layout_constraintTop_toTopOf="parent"
                 android:scaleType="fitCenter"/>
 
@@ -43,7 +43,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descrizione"
+                    android:text="@string/descrizione"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:textColor="@color/black"
@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Info"
+                    android:text="@string/info"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:textColor="@color/black"
@@ -75,7 +75,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Lettini" />
+                        android:text="@string/lettini" />
 
                     <TextView
                         android:id="@+id/tot_lettini"
@@ -92,7 +92,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Ombrelloni"
+                        android:text="@string/ombrelloni"
                         android:layout_weight="1"/>
 
                     <TextView
@@ -110,7 +110,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Sdraio"
+                        android:text="@string/sdraio"
                         android:layout_weight="1"/>
 
                     <TextView
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Sedie"
+                        android:text="@string/sedie"
                         android:layout_weight="1"/>
 
                     <TextView
@@ -142,7 +142,7 @@
                     android:id="@+id/prenota_giornaliero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="prenota giornaliero"
+                    android:text="@string/prenota_giornaliero"
                     android:layout_marginTop="8dp"
                     />
 
@@ -150,7 +150,7 @@
                     android:id="@+id/prenota_mensile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="prenota mensile"
+                    android:text="@string/prenota_mensile"
                     android:layout_marginTop="8dp"
                     />
             </LinearLayout>
@@ -160,8 +160,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="@dimen/material_emphasis_medium"
-                android:text="View Maps"></Button>
+                android:text="@string/view_maps">
+
+            </Button>
         </LinearLayout>
 
     </ScrollView>

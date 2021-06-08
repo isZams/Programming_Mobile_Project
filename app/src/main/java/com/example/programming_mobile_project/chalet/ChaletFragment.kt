@@ -1,5 +1,6 @@
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -91,7 +92,7 @@ class ChaletFragment : Fragment() {
     }
 
     fun DisplayTrack(start: String, end: String) {
-        try {
+      try {
             //passa il punto di partenza e quello di arrivo alla stringa che verrà caricata in google maps
             val uri: Uri = Uri.parse("https://www.google.co.in/maps/dir" + start + "/" + end)
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
@@ -99,7 +100,7 @@ class ChaletFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
 
-        } catch  (ActivityNotFoundException e) {
+        } catch  (e: ActivityNotFoundException) {
             //se non ci sono app per aprire maps viene rimandato al playstore
             val uri: Uri =
                 Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps")

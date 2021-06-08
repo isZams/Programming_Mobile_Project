@@ -29,11 +29,10 @@ class HomePageAdapter(lifecycleOwner: LifecycleOwner) :
         holder.binding.CardTitle.text = model.nome_chalet
         holder.binding.CardInd.text = model.indirizzo
         holder.binding.CardDesc.text = model.descrizione
-        //Glide.with().load(model.locandina).into(holder.binding.CardImgView)
+        Glide.with(holder.itemView.context).load(model.locandina).into(holder.binding.CardImgView)
 
         holder.itemView.setOnClickListener {
-            val id = chaletDB.getChaletID(position.toString())
-            Log.d("id value", id)
+            val id = "GcZn37MhMnXkIyC0DxnQ"
             val action = HomePageDirections.actionHomePageToChaletFragment(id)
             holder.itemView.findNavController().navigate(action)
         }
