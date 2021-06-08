@@ -3,6 +3,7 @@ package com.example.programming_mobile_project.Home_Page
 import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.database.ChaletDB
 import com.example.programming_mobile_project.models.Chalet
@@ -29,6 +30,13 @@ class HomePageAdapter(lifecycleOwner: LifecycleOwner) :
         holder.binding.CardInd.text = model.indirizzo
         holder.binding.CardDesc.text = model.descrizione
         //Glide.with().load(model.locandina).into(holder.binding.CardImgView)
+
+        holder.itemView.setOnClickListener {
+            val id = chaletDB.getChaletID(position.toString())
+            Log.d("id value", id)
+            val action = HomePageDirections.actionHomePageToChaletFragment(id)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun onError(e: FirebaseFirestoreException) {

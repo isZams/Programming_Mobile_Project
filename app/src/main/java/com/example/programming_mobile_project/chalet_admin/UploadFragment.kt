@@ -43,8 +43,8 @@ class UploadFragment : Fragment() {
         val btnImg = view.findViewById<Button>(R.id.btnUploadImg)
 
         btnImg.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/"
             startActivityForResult(intent, Image_Request_Code)
         }
 
@@ -56,6 +56,8 @@ class UploadFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == Image_Request_Code){
+            //uri = data?.data
+            viewModel.uploadImage()
             //imageView.setImageURI(data?.data)
         }
 

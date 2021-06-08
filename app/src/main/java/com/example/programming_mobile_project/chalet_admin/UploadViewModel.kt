@@ -9,45 +9,20 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
+import com.example.programming_mobile_project.database.ChaletDB
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 
 class UploadViewModel(application: Application) : ViewModel() {
-    private var database = Firebase.database("https://book-beach-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
     private val uri: Uri = "".toUri()
     private val context: Context = application.applicationContext
 
     fun upload(){
-        val id = 0
-        val locandina = ""
-        val nome = "G7"
-        val indirizzo = "Lungomare de Citanò"
-        val descrizione= ""
-        val chalet: Chalet = Chalet(locandina, nome, indirizzo, descrizione)
-        Log.d("DEB", chalet.nome_chalet + " " + chalet.indirizzo)
-
-        database.child("chalets").child(id.toString()).setValue(chalet)
-        //database.s
-
-    }
-
-    fun receive(){
-        database.child("chalets").child("0").get().addOnSuccessListener {
-            Log.i("firebase", "Got value ${it.value}")
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
-        }
-    }
-
-    fun simpleUpload(){
-        val db = Firebase.database("https://book-beach-default-rtdb.europe-west1.firebasedatabase.app/")
-        val myRef = db.getReference("message")
-        Log.d("DEB", "FIREBASE REFERENCED")
-        myRef.setValue("Hello, World!")
+        val db: ChaletDB
+       // db.addChalet()
     }
     /*
     fun downloadUrl(): StorageReference {

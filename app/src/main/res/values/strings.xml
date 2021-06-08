@@ -9,5 +9,9 @@
     <string name="email">Email</string>
     <string name="indirizzo">Indirizzo</string>
     <string name="pubblica">Pubblica</string>
-    <string name="descrizione">descrizione</string>
+    <string name="descrizione">Descrizione</string>
+    <string name="totale_lettini">Tot. lettini</string>
+    <string name="totale_ombrelloni">Tot. ombrelloni</string>
+    <string name="totale_sdraie">Tot. sdraie</string>
+    <string name="tot_sedie">Tot. sedie</string>
 </resources>
