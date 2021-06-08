@@ -37,10 +37,6 @@ class ChaletDB : FirebaseDB() {
         return chaletRef
     }
 
-    fun getChaletID(position: Int){
-
-        chaletRef.whereEqualTo("position", position).get()
-    }
 
 
     /** Aggiunge l'oggetto Chalet al database

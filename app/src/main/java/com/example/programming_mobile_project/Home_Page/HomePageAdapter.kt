@@ -3,6 +3,7 @@ package com.example.programming_mobile_project.Home_Page
 import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.database.ChaletDB
@@ -14,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 val chaletDB = ChaletDB()
 val query = chaletDB.queryChalet()
 
-class HomePageAdapter(lifecycleOwner: LifecycleOwner) :
+class HomePageAdapter(lifecycleOwner: LifecycleOwner, private val navController: NavController) :
     FirestoreRecyclerAdapter<Chalet, HomePageHolder>(
         FirestoreRecyclerOptions.Builder<Chalet>()
             .setQuery(query, Chalet::class.java)
@@ -32,9 +33,9 @@ class HomePageAdapter(lifecycleOwner: LifecycleOwner) :
         Glide.with(holder.itemView.context).load(model.locandina).into(holder.binding.CardImgView)
 
         holder.itemView.setOnClickListener {
-            val id = "GcZn37MhMnXkIyC0DxnQ"
+            val id = snapshots.getSnapshot(position).id
             val action = HomePageDirections.actionHomePageToChaletFragment(id)
-            holder.itemView.findNavController().navigate(action)
+            navController.navigate(action)
         }
     }
 

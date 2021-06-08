@@ -26,15 +26,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/chaletFragment"
-        android:name="com.example.programming_mobile_project.chalet.ChaletFragment"
-        android:label="ChaletFragment"
-        tools:layout="@layout/chalet_fragment">
-        <argument
-            android:name="chaletId"
-            app:argType="string" />
-    </fragment>
-    <fragment
         android:id="@+id/elencoPrenotazioni"
         android:name="com.example.programming_mobile_project.elenco_prenotazioni.ElencoPrenotazioni"
         android:label="ElencoPrenotazioni"
@@ -42,6 +33,7 @@
         <action
             android:id="@+id/action_elencoPrenotazioni_to_prenotazione"
             app:destination="@id/prenotazione" />
+
     </fragment>
     <fragment
         android:id="@+id/prenotazione"
@@ -50,6 +42,15 @@
         tools:layout="@layout/prenotazione_fragment">
         <argument
             android:name="keyPrenotazione"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chaletFragment"
+        android:name="ChaletFragment"
+        android:label="ChaletFragment">
+        <argument
+            android:name="chaletId"
             app:argType="string" />
     </fragment>
 
