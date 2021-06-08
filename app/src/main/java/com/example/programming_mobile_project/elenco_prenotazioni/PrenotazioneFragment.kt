@@ -26,7 +26,7 @@ import com.example.programming_mobile_project.models.Chalet
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 
-class Prenotazione : Fragment() {
+class PrenotazioneFragment : Fragment() {
 
     companion object {
         private const val MAX_BRIGHTNESS = 1f
@@ -34,7 +34,7 @@ class Prenotazione : Fragment() {
 
     private var previousBrightness = MAX_BRIGHTNESS
 
-    val args: PrenotazioneArgs by navArgs()
+    val args: PrenotazioneFragmentArgs by navArgs()
 
     private lateinit var binding: PrenotazioneFragmentBinding
     private val prenotazioneDB = PrenotazioneDB()
@@ -51,6 +51,7 @@ class Prenotazione : Fragment() {
         binding.txtSedie.text = it.num_sedie.toString()
         binding.txtDataEffettuata.text = it.timeStampToString(it.timestamp_prenotazione)
         binding.txtTerminePrenotazione.text = it.timeStampToString(it.data_termine_prenotazione)
+        binding.txtTotale.text = it.tot.toString()
 
         chaletDB.selectedChalet.observe(viewLifecycleOwner, observerChalet)
         chaletDB.getChalet(it.key_chalet)

@@ -20,7 +20,7 @@ class Prenotazione(
     val num_lettini: Int,
     val key_utente: String,
     val key_chalet: String,
-    val tot: Float
+    var tot: Float = 0f
 ) {
     constructor() : this(0, 0, 0, 0, 0, 0, "", "", 0f)
 
