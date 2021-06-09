@@ -1,281 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".chalet_admin.UploadFragment">
-
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgLocandina"
-                android:layout_width="171dp"
-                android:layout_height="121dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                tools:src="@android:drawable/ic_menu_gallery" />
-
-            <Button
-                android:id="@+id/btnUploadImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Carica immagine"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:textColor="#4FCA45"
-                style="?attr/materialButtonOutlinedStyle"/>
-
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtChaletTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:hint="Nome chalet"
-            android:textColorHint="@color/black"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtIndirizzo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:hint="Indirizzo"
-            android:textColorHint="@color/black"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/descrizione"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtDesc"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            app:counterMaxLength="200"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="left"
-            android:layout_marginLeft="15dp">
+            android:layout_height="match_parent"
+            tools:context=".chalet_admin.UploadFragment">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgLocandina"
+                        android:layout_width="171dp"
+                        android:layout_height="121dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        tools:src="@android:drawable/ic_menu_gallery" />
+
+                    <Button
+                        android:id="@+id/btnCaricaImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carica immagine"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#4FCA45"
+                        style="?attr/materialButtonOutlinedStyle"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:hint="Nome chalet"
+                    android:textColorHint="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtChaletTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:hint="Indirizzo"
+                    android:textColorHint="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtIndirizzo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
                 <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="18dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/totale_lettini"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/descrizione"
                     android:textColor="@color/black"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtTotLettini"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="18dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
+                    app:counterMaxLength="200"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black" />
+                        android:id="@+id/txtDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        />
+
                 </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:layout_marginLeft="15dp">
 
-                    <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/totale_lettini"
+                            android:textColor="@color/black"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textColorHint="@color/black"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtTotLettini"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/totale_sdraie"
+                            android:textColor="@color/black"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textColorHint="@color/black"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtTotSdraie"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="18dp"
+                            android:text="@string/totale_ombrelloni"
+                            android:textColor="@color/black" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="18dp"
+                            android:textColorHint="@color/black">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtTotOmbrelloni"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="18dp"
+                            android:text="@string/tot_sedie"
+                            android:textColor="@color/black" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="18dp"
+                            android:textColorHint="@color/black">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtTotSedie"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btnPubblica"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="18dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/totale_sdraie"
-                    android:textColor="@color/black"/>
+                    android:text="@string/pubblica"
+                    android:layout_marginTop="18dp"
+                    android:textColor="#4FCA45"
+                    style="?attr/materialButtonOutlinedStyle"/>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtTotSdraie"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left">
+        </FrameLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="18dp"
-                android:text="@string/totale_ombrelloni"
-                android:textColor="@color/black" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtTotOmbrelloni"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="18dp"
-                android:textColorHint="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="18dp"
-                android:text="@string/tot_sedie"
-                android:textColor="@color/black" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtTotSedie"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="18dp"
-                android:textColorHint="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btnPubblica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_gravity="center"
-            android:text="@string/pubblica"
-            android:layout_marginTop="18dp"
-            android:textColor="#4FCA45"
-            style="?attr/materialButtonOutlinedStyle"/>
-
-    </LinearLayout>
-
-
-</FrameLayout>
+</layout>
