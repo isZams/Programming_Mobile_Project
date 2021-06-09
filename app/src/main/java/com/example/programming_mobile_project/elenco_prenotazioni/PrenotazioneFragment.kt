@@ -15,6 +15,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.programming_mobile_project.R
@@ -27,6 +28,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 
 class PrenotazioneFragment : Fragment() {
+    private val viewModel: PrenotazioneViewModel by viewModels()
 
     companion object {
         private const val MAX_BRIGHTNESS = 1f
@@ -70,8 +72,8 @@ class PrenotazioneFragment : Fragment() {
             false
         )
 
-        prenotazioneDB.selectedPrenotazione.observe(viewLifecycleOwner, observerPrenotazione)
-        prenotazioneDB.getPrenotazione(args.keyPrenotazione)
+        viewModel.getPrenotazione(args.keyPrenotazione)
+        viewModel.prenotazione.observe(viewLifecycleOwner, observerPrenotazione)
 
         //genero il qr
         val qr = generaQR(args.keyPrenotazione)
