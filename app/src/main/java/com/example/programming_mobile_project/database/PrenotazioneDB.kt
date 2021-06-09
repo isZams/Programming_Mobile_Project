@@ -1,57 +1,46 @@
 package com.example.programming_mobile_project.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.programming_mobile_project.models.Chalet
 import com.example.programming_mobile_project.models.Prenotazione
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 
 class PrenotazioneDB : FirebaseDB() {
     val prenotazioniRef = db.collection("prenotazioni")
 
-    private val _selectedPrenotazione = MutableLiveData<Prenotazione>()
-    val selectedPrenotazione: LiveData<Prenotazione>
-        get() = _selectedPrenotazione
-
-    private val _selectedPrenotazioni = MutableLiveData<MutableList<Prenotazione>>()
-    val selectedPrenotazioni: LiveData<MutableList<Prenotazione>>
-        get() = _selectedPrenotazioni
-
     /**
      *  Controlla se l'ombrellone è gia occupato e successivamente effettua la prenotazione
-     *  @return se l'ombrellone viene correttamente prenotato viene scritto l'oggetto prenotazione in selectedPrenotazione, altrimenti viene scritto un oggetto vuoto
+     *  @return L'id della prenotazione altrimenti un oggetto null
      */
-    fun setPrenotazione(prenotazione: Prenotazione) {
-        db.runTransaction {
-            prenotazioniRef
-                .whereEqualTo("key_chalet", prenotazione.key_chalet)
-                .whereEqualTo("n_ombrellone", prenotazione.n_ombrellone)
-                .get().addOnSuccessListener {
-                    if (it.isEmpty) {
-                        //ombrellone è libero
-                        prenotazioniRef
-                            .add(prenotazione)
-                            .addOnSuccessListener {
-                                // prenotazione effettuata con successo
-                                _selectedPrenotazione.value = prenotazione
-                            }
-                            .addOnFailureListener {
-                                _selectedPrenotazione.value = Prenotazione()
-                            }
-                    } else {
-                        //ombrellone occupato
-                        _selectedPrenotazione.value = Prenotazione()
-                    }
-                }
+    suspend fun setPrenotazione(prenotazione: Prenotazione): String? {
+        try {
+            val transaction = db.runTransaction {
+                prenotazioniRef
+                    .whereEqualTo("key_chalet", prenotazione.key_chalet)
+                    .whereEqualTo("n_ombrellone", prenotazione.n_ombrellone)
+                    .get()
+
+            }.await()
+            if (transaction.result.isEmpty) {
+                //ombrellone libero
+                val p = prenotazioniRef
+                    .add(prenotazione).await()
+                return p.id
+            }
+            // ombrellone occupato
+            return null
+        } catch (e: Exception) {
+            return null
         }
     }
 
-
     /**
-     *
      * @param key_utente la chiave dell'utente di cui si vuole ottenere le prenotazioni
      * @return il relativo oggetto [Query]
      */
@@ -62,31 +51,30 @@ class PrenotazioneDB : FirebaseDB() {
 
 
     /**
-     * Facendo uso di [queryPrenotazioniByUtente] popola selectedPrenotazioni con le prenotazioni dell utente
+     * Fa uso di [queryPrenotazioniByUtente]
      * @param key_utente chiave dell'utente
-     * @return se non ci sono errori popola [selectedPrenotazioni] altrimenti setta una mutableList vuota
+     * @return Ritorna la lista delle prenotazioni, altrimenti null in caso di errore
      */
-    fun getPrenotazioniByUtente(key_utente: String) {
-        queryPrenotazioniByUtente(key_utente).get().addOnSuccessListener {
-            it.toObjects<Prenotazione>()
-            _selectedPrenotazioni.value = it.toObjects<Prenotazione>().toMutableList()
-        }.addOnFailureListener {
-            _selectedPrenotazioni.value = mutableListOf()
+    suspend fun getPrenotazioniByUtente(key_utente: String): List<Prenotazione>? {
+        return try {
+            queryPrenotazioniByUtente(key_utente)
+                .get().await().toObjects()
+        } catch (e: Exception) {
+            null
         }
     }
 
     /**
      * Dato l'id della prenotazione ritorna le info della prenotazione corrispondente
      * @param key_prenotazione key della prenotazione
-     * @return Il valore ottenuto dalla query viene inserito nel LiveData [selectedPrenotazione]. Se non viene trovato ritorna Prenotazione()
+     * @return DocumentSnapshot?, se la prenotazione è stata trovata è popolato, altrimenti è null
      */
-    fun getPrenotazione(key_prenotazione: String) {
-        prenotazioniRef.document(key_prenotazione)
-            .get().addOnSuccessListener {
-                // toObject trasforma l'oggetto DocumentSnapshot! (it) in un oggetto della classe indicata
-                _selectedPrenotazione.value = it.toObject<Prenotazione>()
-            }
-            .addOnFailureListener { _selectedPrenotazione.value = Prenotazione() }
+    suspend fun getPrenotazione(key_prenotazione: String): Prenotazione? {
+        return try {
+            prenotazioniRef.document(key_prenotazione)
+                .get().await().toObject()
+        } catch (e: Exception) {
+            null
+        }
     }
-
 }

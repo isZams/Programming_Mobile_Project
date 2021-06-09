@@ -1,10 +1,15 @@
 package com.example.programming_mobile_project.database
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Chalet
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.tasks.await
 
 
 //  https://stackoverflow.com/a/63889166
@@ -38,20 +43,38 @@ class ChaletDB : FirebaseDB() {
     }
 
 
-
     /** Aggiunge l'oggetto Chalet al database
      * @param chalet Lo chalet da aggiungere
-     * @return Se lo chalet viene correttamente caricato in selectedChalet viene inserito chalet altrimenti Chalet()
+     * @return l'id dello chalet che è stato inserito. Ritorna null se c'è stato un errore
      */
-    fun addChalet(chalet: Chalet) {
-        chaletRef
-            .add(chalet)
-            .addOnSuccessListener {
-                _selectedChalet.value = chalet
+    suspend fun addChalet(chalet: Chalet): String {
+        var id = ""
+        try {
+            val response = chaletRef.add(chalet).await()
+            id = response.id
+            Log.d("Deb", "id chalet caricato in ChaletDB" + id)
+        }
+        catch (e: Exception){
+        }
+        return id
+    }
+
+    /** Aggiunge l'oggetto Chalet al database
+     * @param image l'immagine da caricare di tipo Uri
+     * @param nomeFile il nome con cui caricare l'immagine
+     * @return stringa che contiene l'url dell'immagine caricata nel database
+     */
+    suspend fun uploadImage(image: Uri, nomeFile: String): String {
+        var url= ""
+        if (nomeFile != "") {
+            val storage = Firebase.storage.reference
+            val imageRef = storage.child("images").child(nomeFile)
+            imageRef.putFile(image).await()
+            imageRef.downloadUrl.addOnSuccessListener {
+                url = it.toString()
             }
-            .addOnFailureListener {
-                _selectedChalet.value = Chalet()
-            }
+        }
+        return url
     }
 
 
