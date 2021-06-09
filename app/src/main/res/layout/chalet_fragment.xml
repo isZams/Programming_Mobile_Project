@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +67,10 @@
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
+
+
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -153,16 +157,17 @@
                     android:text="@string/prenota_mensile"
                     android:layout_marginTop="8dp"
                     />
+                <Button
+                    android:id="@+id/bottone_maps"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/view_maps">
+
+                </Button>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/bottone_maps"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:text="@string/view_maps">
 
-            </Button>
         </LinearLayout>
 
     </ScrollView>

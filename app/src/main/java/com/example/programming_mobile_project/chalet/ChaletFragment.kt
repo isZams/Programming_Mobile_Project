@@ -94,18 +94,24 @@ class ChaletFragment : Fragment() {
 
         chaletDB.selectedChalet.observe(viewLifecycleOwner, chaletObserver)
 
-
-        //val startPoint: String = "null".trim()
         val btnMaps: Button = binding.bottoneMaps
-        // al click del bottone chiama la funzione displayTraci
+        // al click del bottone chiama la funzione displayTrack
         btnMaps.setOnClickListener(View.OnClickListener {
                 DisplayTrack(getLastLocation(), destination)
         })
     }
 
+    /**
+     * Dopo aver passato i due paremtri, viene lanciato un intent con cui apre GoogleMaps, msotrando
+     * il percorso per raggiungere la destinazione
+     * Se non è presente un'app sul telefono per aprirla viene lanciato un intent con cui scaricare
+     * l'applicazione da PlayStore.
+     * @param start Prende come valore la posizione corrente dell'utente
+     * @param end Prende come valore la posizione dello chalet
+     *
+     */
     fun DisplayTrack(start: String, end: String) {
         try {
-            //passa il punto di partenza e quello di arrivo alla stringa che verrà caricata in google maps
             val uri: Uri = Uri.parse("https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end)
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setPackage("com.google.android.apps.maps")
@@ -113,7 +119,6 @@ class ChaletFragment : Fragment() {
             startActivity(intent)
 
         } catch (e: ActivityNotFoundException) {
-            //se non ci sono app per aprire maps viene rimandato al playstore
             val uri: Uri =
                 Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps")
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
@@ -169,7 +174,10 @@ class ChaletFragment : Fragment() {
     }
 
 
-
+    /**
+     * Prende il valore dell'ultima posizione dell'utente
+     * @return startPoint ovvero l'ultima posizione registrata del dispositivo
+     */
     @SuppressLint("MissingPermission")
     private fun getLastLocation(): String {
         var startPoint = ""
@@ -219,6 +227,12 @@ class ChaletFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Prende come parametri latitudine e longitudine della posizione e li converte in un indirizzo
+     * @param lat
+     * @param lng
+     */
     private fun getAddress(lat: Double, lng: Double): String {
         val geocoder = Geocoder(this.requireContext())
         val list = geocoder.getFromLocation(lat, lng, 1)
