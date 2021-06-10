@@ -15,7 +15,7 @@ class PrenotazioneViewModel : ViewModel() {
     val prenotazione: LiveData<Prenotazione>
         get() = _prenotazione
 
-    fun getPrenotazione(key_prenotazione:String){
+    fun getPrenotazione(key_prenotazione: String) {
         viewModelScope.launch {
             _prenotazione.value = prenotazioneDB.getPrenotazione(key_prenotazione)
         }
