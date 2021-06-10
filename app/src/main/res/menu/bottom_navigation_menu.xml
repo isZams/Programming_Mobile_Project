@@ -11,7 +11,7 @@
             android:id="@+id/item2"
             android:icon="@drawable/ic_baseline_alternate_email_24"
             android:title="Contact us"
-            android:onClick="sendHtmlEmail"/>
+            />
 
         <item
             android:id="@+id/Photos"

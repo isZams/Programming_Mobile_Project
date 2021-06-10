@@ -1,54 +1,40 @@
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
-
-
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
-
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.R
-
 import com.example.programming_mobile_project.database.ChaletDB
 import com.example.programming_mobile_project.databinding.ChaletFragmentBinding
 import com.example.programming_mobile_project.models.Chalet
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import android.content.Context
-import android.content.Context.*
-import android.location.Geocoder
-import android.os.Looper
-import android.util.Log
-
 import com.google.android.gms.location.*
-import android.content.Context.LOCATION_SERVICE as ContextLOCATION_SERVICE
 
 
 class ChaletFragment : Fragment() {
     val args: ChaletFragmentArgs by navArgs()
-    private lateinit var binding: ChaletFragmentBinding
+
     val PERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
-
+    lateinit var binding: ChaletFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,15 +43,13 @@ class ChaletFragment : Fragment() {
 
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(this.requireContext())
-
         getLastLocation()
         val view = inflater.inflate(R.layout.chalet_fragment, container, false)
-
-        binding = DataBindingUtil.setContentView(requireActivity(), R.layout.chalet_fragment)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.chalet_fragment, container, false)
 
         return view
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,7 +81,7 @@ class ChaletFragment : Fragment() {
         val btnMaps: Button = binding.bottoneMaps
         // al click del bottone chiama la funzione displayTrack
         btnMaps.setOnClickListener(View.OnClickListener {
-                DisplayTrack(getLastLocation(), destination)
+            DisplayTrack(getLastLocation(), destination)
         })
     }
 
@@ -112,7 +96,8 @@ class ChaletFragment : Fragment() {
      */
     fun DisplayTrack(start: String, end: String) {
         try {
-            val uri: Uri = Uri.parse("https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end)
+            val uri: Uri =
+                Uri.parse("https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end)
             val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setPackage("com.google.android.apps.maps")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -167,7 +152,8 @@ class ChaletFragment : Fragment() {
     }
 
     fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var locationManager: LocationManager =
+            activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
@@ -238,4 +224,6 @@ class ChaletFragment : Fragment() {
         val list = geocoder.getFromLocation(lat, lng, 1)
         return list[0].getAddressLine(0)
     }
+
+
 }
