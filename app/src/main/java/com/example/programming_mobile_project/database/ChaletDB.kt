@@ -53,8 +53,7 @@ class ChaletDB : FirebaseDB() {
             val response = chaletRef.add(chalet).await()
             id = response.id
             Log.d("Deb", "id chalet caricato in ChaletDB" + id)
-        }
-        catch (e: Exception){
+        } catch (e: Exception) {
         }
         return id
     }
@@ -65,7 +64,7 @@ class ChaletDB : FirebaseDB() {
      * @return stringa che contiene l'url dell'immagine caricata nel database
      */
     suspend fun uploadImage(image: Uri, nomeFile: String): String {
-        var url= ""
+        var url = ""
         if (nomeFile != "") {
             val storage = Firebase.storage.reference
             val imageRef = storage.child("images").child(nomeFile)
@@ -76,33 +75,4 @@ class ChaletDB : FirebaseDB() {
         }
         return url
     }
-
-
-//
-//    /**
-//     * Dato l'id dello chalet ritorna le info dello chalet corrispondente
-//     * @param chaletKey key dello chalet
-//     * Il valore ottenuto dalla query viene inserito nel LiveData selectedChalet
-//     */
-//    fun getChalet(chaletKey: String) {
-//        db.reference
-//            .child("chalets")
-//            .child(chaletKey)
-//            .child("info")
-//            .get().addOnSuccessListener {
-//                Log.i("firebasee", it.child("descrizione").value.toString())
-//                // getValue trasforma l'oggetto datasnapshot (it) in un oggetto della classe indicata
-//                _selectedChalet.value = it.getValue(Chalet::class.java)
-//            }
-//    }
-//
-//
-//    /** Aggiunge l'oggeto Chalet al database
-//     * @param chalet Lo chalet da aggiungere
-//     */
-//    fun addChalet(chalet: Chalet) {
-//        db.reference.child("chalets").push().child("info").setValue(chalet).addOnFailureListener {
-//            Log.i("firebasee", "Errore ${it}")
-//        }
-//    }
 }
