@@ -3,20 +3,21 @@
 
 
         <item
-            android:id="@+id/home"
+            android:id="@+id/item1"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home" />
+
+        <item
+            android:id="@+id/item2"
+            android:icon="@drawable/ic_baseline_alternate_email_24"
+            android:title="Contact us"
+            />
 
         <item
             android:id="@+id/Photos"
             android:icon="@drawable/ic_baseline_my_location_24"
             android:title="Maps" />
 
-        <item
-            android:id="@+id/more"
-            android:icon="@drawable/ic_baseline_alternate_email_24"
-            android:title="Contact us"
-            android:onClick="sendHtmlEmail"/>
 
 
 </menu>
