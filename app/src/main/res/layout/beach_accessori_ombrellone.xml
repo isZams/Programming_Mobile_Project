@@ -21,6 +21,7 @@
             android:id="@+id/n_ombrello_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_beach_access_24"
             android:textAlignment="textEnd" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 

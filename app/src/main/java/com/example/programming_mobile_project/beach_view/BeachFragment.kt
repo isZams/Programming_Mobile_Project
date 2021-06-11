@@ -21,6 +21,7 @@ import com.example.programming_mobile_project.databinding.BeachMapBinding
 import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Listino
 import java.io.File
+import java.lang.NumberFormatException
 
 /**
  * Al caricamento del fragment viene lanciato viewModel.getSvg. Nell'observer relativo a getSvg,
@@ -54,18 +55,18 @@ class BeachFragment : Fragment() {
         chaletKey = "GcZn37MhMnXkIyC0DxnQ"
         var pathSvg = ""
         var currentListino = Listino()
-        var currentContatore = Contatore()
 
         val listinoObserver = Observer<Listino?> {
             if (it != null) {
                 currentListino = it
+                viewModel.loadContatori(chaletKey)
             }
+
         }
 
         val contatoreObserver = Observer<Contatore?> {
             if (it != null) {
-                currentContatore = it
-                setUpBtnListener(it)
+                setUpBtnListener(it, currentListino)
             }
         }
 
@@ -107,6 +108,7 @@ class BeachFragment : Fragment() {
         viewModel.contatore.observe(viewLifecycleOwner, contatoreObserver)
 
         viewModel.getSvg(chaletKey)
+        viewModel.loadListino(chaletKey)
 
         val ombrelloSelectedObserver = Observer<Int> {
             Log.i("eccomi", "fewfwfefewfewd")
@@ -165,28 +167,44 @@ class BeachFragment : Fragment() {
         }
     }
 
-    fun setUpBtnListener(contatore: Contatore) {
-        val editLettini = binding.extra.findViewById<EditText>(R.id.editLettini)
-        editLettini.filters = arrayOf<InputFilter>(MinMaxFilter(0, contatore.current_lettini))
-        editLettini.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
+    fun setUpBtnListener(contatore: Contatore, listino: Listino) {
+        fun setEditText(editText: EditText, txtView: TextView, rimanenti: Int, prezzo: Float) {
+            editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, rimanenti))
+            editText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    try {
+                        txtView.text =
+                            (s.toString().toInt() * prezzo).toString()
+                    } catch (e: NumberFormatException) {
+                        txtView.text = ""
+                    }
+                }
 
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+                override fun afterTextChanged(s: Editable?) {
+                }
+            })
         }
 
-        )
+        val editLettini = binding.extra.findViewById<EditText>(R.id.editLettini)
+        val editSdraie = binding.extra.findViewById<EditText>(R.id.editSdraie)
+        val editSedie = binding.extra.findViewById<EditText>(R.id.editSedie)
+        val prezzoLettini = binding.extra.findViewById<TextView>(R.id.prezzo_tot_lettini)
+        val prezzoSdraie = binding.extra.findViewById<TextView>(R.id.prezzo_tot_sdraie)
+        val prezzoSedie = binding.extra.findViewById<TextView>(R.id.prezzo_tot_sedie)
+
+        setEditText(editLettini, prezzoLettini, contatore.current_lettini, listino.prezzo_lettini)
+        setEditText(editSdraie, prezzoSdraie, contatore.current_sdraie, listino.prezzo_sdraio)
+        setEditText(editSedie, prezzoSedie, contatore.current_sedie, listino.prezzo_sedie)
+
+
     }
 
     override fun onDestroy() {
