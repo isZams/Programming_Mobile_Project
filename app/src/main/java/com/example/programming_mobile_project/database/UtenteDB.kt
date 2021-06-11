@@ -1,4 +1,5 @@
 package com.example.programming_mobile_project.database
+import android.util.Log
 import com.example.programming_mobile_project.models.Utente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.toObject
@@ -15,7 +16,7 @@ class UtenteDB : FirebaseDB() {
                 .document(key_user)
                 .get()
                 .await()
-            utente.toObject()
+            utente.toObject<Utente>()
         } catch (e: Exception) {
             null
         }
@@ -28,9 +29,21 @@ class UtenteDB : FirebaseDB() {
      */
     suspend fun addUtente(id: String, utente: Utente){
         try {
-            val response = utenteRef.document(id).set(utente).await()
+            utenteRef.document(id).set(utente).await()
         } catch (e: Exception) {
         }
+    }
+
+    /**
+     * Funzione che modifica prende l'id dell'utente attualmente loggato e modifica le informazioni
+     * contenute nel database
+     * @param utente informazioni utente da modificare
+     */
+    suspend fun modificaUtente(utente: Utente){
+        try{
+            utenteRef.document(key_user).set(utente).await()
+        }
+        catch (e: Exception){}
     }
 }
 
