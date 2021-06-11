@@ -46,7 +46,7 @@ class ChaletFragment : Fragment() {
         getLastLocation()
         val view = inflater.inflate(R.layout.chalet_fragment, container, false)
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.chalet_fragment, container, false)
+            DataBindingUtil.setContentView(requireActivity(),R.layout.chalet_fragment)
 
         return view
     }
@@ -80,9 +80,9 @@ class ChaletFragment : Fragment() {
 
         val btnMaps: Button = binding.bottoneMaps
         // al click del bottone chiama la funzione displayTrack
-        btnMaps.setOnClickListener(View.OnClickListener {
+        btnMaps.setOnClickListener{
             DisplayTrack(getLastLocation(), destination)
-        })
+        }
     }
 
     /**
