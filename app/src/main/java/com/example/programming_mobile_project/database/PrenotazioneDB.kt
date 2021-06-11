@@ -1,11 +1,7 @@
 package com.example.programming_mobile_project.database
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Prenotazione
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.tasks.await
@@ -73,6 +69,25 @@ class PrenotazioneDB : FirebaseDB() {
         return try {
             prenotazioniRef.document(key_prenotazione)
                 .get().await().toObject()
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    /**
+     * Restituisce, di un determinato chalet, una lista contenente i numeri di ombrellone occupati.
+     * In caso di errore restituisce null
+     */
+    suspend fun getOmbrelloniOccupati(chaletKey: String): List<Int>? {
+        return try {
+            val prenotazioni = prenotazioniRef
+                .whereEqualTo("key_chalet", chaletKey)
+                .whereGreaterThan("data_termine_prenotazione", System.currentTimeMillis())
+                .get()
+                .await()
+            val n_ombrelloni =
+                prenotazioni.map { it.toObject<Prenotazione>().n_ombrellone }
+            n_ombrelloni
         } catch (e: Exception) {
             null
         }
