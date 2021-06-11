@@ -23,4 +23,7 @@
     <string name="lettini">Lettini</string>
     <string name="info">Info</string>
     <string name="immagine_chalet">immagine_chalet</string>
+    <string name="messaggio_conferma_prenotazione">Vuoi procedere con la seguente prenotazione?</string>
+    <string name="decline">Annulla</string>
+    <string name="accept">Si</string>
 </resources>

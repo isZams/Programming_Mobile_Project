@@ -2,6 +2,7 @@
 package com.example.programming_mobile_project.beach_view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -20,6 +21,8 @@ import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.BeachMapBinding
 import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Listino
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.lang.NumberFormatException
 
@@ -116,6 +119,26 @@ class BeachFragment : Fragment() {
         }
         viewModel.ombrello.observe(viewLifecycleOwner, ombrelloSelectedObserver)
 
+        binding.prenotaOmbrellone.setOnClickListener {
+            if (binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text.toString() == "") {
+                view?.let { view ->
+                    Snackbar.make(
+                        view,
+                        "Seleziona prima un ombrellone",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                showDialogAcquisto(
+                    context,
+                    binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text.toString(),
+                    binding.extra.findViewById<TextView>(R.id.editLettini).text.toString(),
+                    binding.extra.findViewById<TextView>(R.id.editSedie).text.toString(),
+                    binding.extra.findViewById<TextView>(R.id.editSdraie).text.toString(),
+                )
+            }
+        }
+
         //serve per mostrare il bottone nella toolbar
         setHasOptionsMenu(true)
 
@@ -205,6 +228,37 @@ class BeachFragment : Fragment() {
         setEditText(editSedie, prezzoSedie, contatore.current_sedie, listino.prezzo_sedie)
 
 
+    }
+
+    fun showDialogAcquisto(
+        curr_context: Context?,
+        numeroOmbrellone: String,
+        n_lettini: String,
+        n_sedie: String,
+        n_sdraie: String
+    ) {
+        var resoconto = " \nOmbrellone: $numeroOmbrellone"
+        resoconto += if (n_lettini == "0" || n_lettini == "") "" else " \nLettini : $n_lettini"
+        resoconto += if (n_sedie == "0" || n_sedie == "") "" else " \nSedie : $n_sedie"
+        resoconto += if (n_sdraie == "0" || n_sdraie == "") "" else " \nSdraie : $n_sdraie"
+
+        if (curr_context != null) {
+            MaterialAlertDialogBuilder(
+                curr_context,
+                R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered
+            )
+                .setMessage(
+                    resources.getString(R.string.messaggio_conferma_prenotazione) + resoconto
+                )
+                .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
+                    // Negativo
+                }
+                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                    // Va avanti
+                    Log.i("ditto", "si")
+                }
+                .show()
+        }
     }
 
     override fun onDestroy() {
