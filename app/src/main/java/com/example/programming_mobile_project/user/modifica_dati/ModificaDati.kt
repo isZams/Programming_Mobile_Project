@@ -49,7 +49,7 @@ class ModificaDati : Fragment() {
         binding.lifecycleOwner = this
         viewmodel.getUser()
         binding.modificaDati.setOnClickListener(){
-            viewmodel.inviaModifiche(binding.nome.text, binding.cognome.text)
+            viewmodel.inviaModifiche(binding.nome.text.toString(), binding.cognome.text.toString())
         }
     }
 

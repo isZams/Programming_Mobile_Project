@@ -22,7 +22,7 @@ class ModificaDatiViewModel: ViewModel() {
     private val utenteDB = UtenteDB()
 
     fun getUser(){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch() {
             _user.value = utenteDB.getUtente()
             Log.d("Deb", "Utente recuperato: " + user.value?.nome)
         }
