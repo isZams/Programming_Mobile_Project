@@ -54,17 +54,16 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/modifica_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Richiedi modifica password"/>
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/modifica_dati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="modifica dati"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Se invece vuoi modificare la tua password"
         </LinearLayout>
     </ScrollView>
 </layout>
