@@ -1,6 +1,7 @@
 package com.example.programming_mobile_project.user.modifica_dati
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +33,10 @@ class ModificaDatiViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             utenteDB.modificaUtente(Utente(nome, cognome))
         }
+    }
+
+    fun resetPassword(){
+        utenteDB.resetPassword()
     }
 
 }
