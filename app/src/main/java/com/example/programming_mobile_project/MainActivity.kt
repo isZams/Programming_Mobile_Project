@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import com.example.programming_mobile_project.Home_Page.HomePage
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,14 +17,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val bottomNav: BottomNavigationView = findViewById(R.id.nav_view)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
 
         bottomNav.setOnNavigationItemSelectedListener OnNavigationItemSelectedListener@{ item ->
             when (item.itemId) {
                 R.id.item1 -> {
-                    val fragment = HomePage()
+                    val fragment: Fragment = HomePage()
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
+                       .replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
                         .commit()
                     true
                 }
