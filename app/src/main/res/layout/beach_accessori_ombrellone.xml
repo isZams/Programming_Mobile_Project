@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ombrellone"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ombrellone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <TextView
+            android:id="@+id/n_ombrello_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,12 +45,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:labelFor="@id/editLettini" />
 
-        <View
+        <TextView
+            android:id="@+id/prezzo_tot_lettini"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorSecondary" />
 
 
     </LinearLayout>
@@ -62,12 +81,17 @@
             android:layout_weight="1"
             android:autofillHints="N. sdraie"
             android:ems="10"
-            android:inputType="number" />
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:labelFor="@id/editSdraie" />
 
-        <View
+        <TextView
+            android:id="@+id/prezzo_tot_sdraie"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorSecondary" />
 
     </LinearLayout>
 
@@ -89,13 +113,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:labelFor="@id/editSedie" />
 
         <TextView
+            android:id="@+id/prezzo_tot_sedie"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
-
-
 </LinearLayout>
