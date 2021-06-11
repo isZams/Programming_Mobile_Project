@@ -12,7 +12,7 @@
             android:icon="@mipmap/ic_launcher_round"
             android:title="Visualizza i tuoi dati" />
         <item
-            android:id="@+id/nav_logout"
+            android:id="@+id/logout"
             android:icon="@mipmap/ic_launcher_round"
             android:title="Logout" />
 
