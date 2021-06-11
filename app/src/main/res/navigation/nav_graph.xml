@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_authFragment_to_homePage"
             app:destination="@id/HomePage" />
+        <action
+            android:id="@+id/action_AuthFragment_to_loginAuthFragment"
+            app:destination="@id/loginAuthFragment" />
     </fragment>
 
     <fragment
@@ -52,6 +55,16 @@
         <argument
             android:name="chaletId"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginAuthFragment"
+        android:name="com.example.programming_mobile_project.login.LoginAuthFragment"
+        android:label="LoginAuthFragment"
+        tools:layout="@layout/login_interface">
+        <action
+            android:id="@+id/action_loginAuthFragment_to_HomePage"
+            app:destination="@id/HomePage" />
     </fragment>
 
 </navigation>
