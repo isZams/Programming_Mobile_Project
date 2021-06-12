@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navController.navigate(R.id.modificaDati)
             }
             R.id.logout -> {
-                val modelAuth = AuthViewModel(this)
+                val modelAuth = AuthViewModel()
                 modelAuth.logOut()
                 navController.navigate(R.id.login)
             }
