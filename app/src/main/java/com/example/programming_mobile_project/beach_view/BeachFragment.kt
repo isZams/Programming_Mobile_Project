@@ -2,7 +2,6 @@
 package com.example.programming_mobile_project.beach_view
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -13,14 +12,17 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.BeachMapBinding
 import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Listino
+import com.example.programming_mobile_project.models.Prenotazione
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
@@ -62,6 +64,8 @@ class BeachFragment : Fragment() {
         val listinoObserver = Observer<Listino?> {
             if (it != null) {
                 currentListino = it
+                binding.extra.findViewById<TextView>(R.id.ombrello_prezzo).text =
+                    "${currentListino.prezzo_ombrelloni} €"
                 viewModel.loadContatori(chaletKey)
             }
 
@@ -101,7 +105,22 @@ class BeachFragment : Fragment() {
                 "UTF-8",
                 null
             )
+            binding.mapProgressBar.visibility = View.GONE
+            binding.beachMapView.visibility = View.VISIBLE
         }
+
+        val idObserver = Observer<String?> {
+            if (it == null) {
+                Toast.makeText(context, "Errore nella prenotazione", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            } else {
+                val action = BeachFragmentDirections.actionBeachFragmentToPrenotazione(it)
+                Toast.makeText(context, "Prenotazione effettuata con successo", Toast.LENGTH_LONG)
+                    .show()
+                findNavController().navigate(action)
+            }
+        }
+
 
         // Aggancio gli observer ai LiveData
         viewModel.svgDownloaded.observe(viewLifecycleOwner, svgObserver)
@@ -109,12 +128,12 @@ class BeachFragment : Fragment() {
         viewModel.htmlSource.observe(viewLifecycleOwner, htmlObserver)
         viewModel.listino.observe(viewLifecycleOwner, listinoObserver)
         viewModel.contatore.observe(viewLifecycleOwner, contatoreObserver)
+        viewModel.idPrenotazione.observe(viewLifecycleOwner, idObserver)
 
         viewModel.getSvg(chaletKey)
         viewModel.loadListino(chaletKey)
 
         val ombrelloSelectedObserver = Observer<Int> {
-            Log.i("eccomi", "fewfwfefewfewd")
             binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text = it.toString()
         }
         viewModel.ombrello.observe(viewLifecycleOwner, ombrelloSelectedObserver)
@@ -130,11 +149,11 @@ class BeachFragment : Fragment() {
                 }
             } else {
                 showDialogAcquisto(
-                    context,
                     binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text.toString(),
+                    currentListino.prezzo_ombrelloni,
                     binding.extra.findViewById<TextView>(R.id.editLettini).text.toString(),
-                    binding.extra.findViewById<TextView>(R.id.editSedie).text.toString(),
                     binding.extra.findViewById<TextView>(R.id.editSdraie).text.toString(),
+                    binding.extra.findViewById<TextView>(R.id.editSedie).text.toString(),
                 )
             }
         }
@@ -231,34 +250,67 @@ class BeachFragment : Fragment() {
     }
 
     fun showDialogAcquisto(
-        curr_context: Context?,
-        numeroOmbrellone: String,
+        nOmbr: String,
+        prezzoOmbrellone: Float,
         n_lettini: String,
+        n_sdraie: String,
         n_sedie: String,
-        n_sdraie: String
     ) {
-        var resoconto = " \nOmbrellone: $numeroOmbrellone"
+        var resoconto = " \nOmbrellone: $nOmbr"
         resoconto += if (n_lettini == "0" || n_lettini == "") "" else " \nLettini : $n_lettini"
         resoconto += if (n_sedie == "0" || n_sedie == "") "" else " \nSedie : $n_sedie"
         resoconto += if (n_sdraie == "0" || n_sdraie == "") "" else " \nSdraie : $n_sdraie"
 
-        if (curr_context != null) {
+        if (context != null) {
             MaterialAlertDialogBuilder(
-                curr_context,
+                requireContext(),
                 R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered
             )
                 .setMessage(
                     resources.getString(R.string.messaggio_conferma_prenotazione) + resoconto
                 )
-                .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
+                .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
                     // Negativo
                 }
-                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
-                    // Va avanti
-                    Log.i("ditto", "si")
+                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                    makePrenotazione(prezzoOmbrellone)
                 }
                 .show()
         }
+    }
+
+    fun makePrenotazione(prezzoOmbrellone: Float) {
+        binding.mapProgressBar.visibility = View.VISIBLE
+        binding.beachMapView.visibility = View.GONE
+
+        var totale = prezzoOmbrellone
+        totale += binding.extra.findViewById<TextView>(R.id.prezzo_tot_sdraie).text.toString()
+            .toFloatOrNull() ?: 0f
+        totale += binding.extra.findViewById<TextView>(R.id.prezzo_tot_lettini).text.toString()
+            .toFloatOrNull() ?: 0f
+        totale += binding.extra.findViewById<TextView>(R.id.prezzo_tot_sedie).text.toString()
+            .toFloatOrNull() ?: 0f
+
+
+        // TODO cambiare il primo parametro nel costruttore di Prenotazione (è data termine prenotazione)
+        viewModel.prenota(
+            Prenotazione(
+                // 86400000 ms = 1 giorno
+                System.currentTimeMillis() + 86400000,
+                System.currentTimeMillis(),
+                binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text.toString()
+                    .toInt(),
+                binding.extra.findViewById<TextView>(R.id.editSdraie).text.toString().toIntOrNull()
+                    ?: 0,
+                binding.extra.findViewById<TextView>(R.id.editSedie).text.toString().toIntOrNull()
+                    ?: 0,
+                binding.extra.findViewById<TextView>(R.id.editLettini).text.toString().toIntOrNull()
+                    ?: 0,
+                "key_utente",
+                chaletKey,
+                totale,
+            )
+        )
     }
 
     override fun onDestroy() {

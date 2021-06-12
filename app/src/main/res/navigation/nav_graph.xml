@@ -59,6 +59,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/beachFragment"
+        android:name="com.example.programming_mobile_project.beach_view.BeachFragment"
+        android:label="BeachFragment"
+        tools:layout="@layout/beach_map">
+        <action
+            android:id="@+id/action_beachFragment_to_prenotazione"
+            app:destination="@id/prenotazione" />
+    </fragment>
+
+    <fragment
         android:id="@+id/loginAuthFragment"
         android:name="com.example.programming_mobile_project.login.LoginAuthFragment"
         android:label="LoginAuthFragment"
