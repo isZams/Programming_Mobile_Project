@@ -8,19 +8,24 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.programming_mobile_project.Home_Page.HomePage
+import com.example.programming_mobile_project.database.UtenteDB
+import com.example.programming_mobile_project.models.Utente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 
 class AuthViewModel(private val context: Context): ViewModel() {
 
-    private var auth: FirebaseAuth = Firebase.auth
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val userDB: UtenteDB ?= null
 
     fun signUp(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener() { task ->
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SING UP SUCCESS", "createUserWithEmail:success")
@@ -29,13 +34,12 @@ class AuthViewModel(private val context: Context): ViewModel() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("SING UP FAILED", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
     fun sigIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener() { task ->
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SING IN SUCCESS", "signInWithEmail:success")
@@ -53,5 +57,18 @@ class AuthViewModel(private val context: Context): ViewModel() {
     fun firebaseLogOut(){
         Firebase.auth.signOut()
     }
+
+    fun addAuthUserOnDB(utente: Utente){
+        try {
+            val user = auth
+            viewModelScope.launch {
+                // launch è un bridge tra il mondo delle funzioni normali e quello delle coroutine
+                userDB?.addUtente(user.uid.toString(), utente)
+
+            }
+        }catch (e: Exception){}
+
+    }
+
 
 }

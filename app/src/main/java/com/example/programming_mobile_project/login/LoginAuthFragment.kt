@@ -35,8 +35,8 @@ class LoginAuthFragment: Fragment() {
 
         btnAccedi.setOnClickListener(){
             //model.firebaseEmailSigin(email, pw)
-            email = txtPassword.text.toString().trim()
-            pw = txtUsername.text.toString().trim()
+            email = txtUsername.text.toString().trim()
+            pw = txtPassword.text.toString().trim()
             model.sigIn(email, pw)
             view.findNavController().navigate(R.id.action_loginAuthFragment_to_HomePage)
         }
