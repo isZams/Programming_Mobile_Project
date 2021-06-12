@@ -67,5 +67,10 @@
             android:id="@+id/action_loginAuthFragment_to_HomePage"
             app:destination="@id/HomePage" />
     </fragment>
+    <fragment
+        android:id="@+id/modificaDati"
+        android:name="com.example.programming_mobile_project.user.modifica_dati.ModificaDati"
+        android:label="ModificaDati"
+        tools:layout="@layout/modifica_dati_fragment"/>
 
 </navigation>

@@ -4,17 +4,25 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.programming_mobile_project.Home_Page.HomePage
+import com.example.programming_mobile_project.login.AuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawer: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +44,31 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        val drawerNav = findViewById<NavigationView>(R.id.nav_view)
+        drawer = findViewById(R.id.drawer_layout)
+        drawerNav.setNavigationItemSelectedListener(this)
+
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawer.closeDrawer(GravityCompat.START)
+        val navController = findNavController(R.id.nav_host_fragment)
+        when (item.itemId){
+            R.id.nav_prenotation -> {
+                navController.navigate(R.id.elencoPrenotazioni)
+            }
+            R.id.nav_update ->{
+                navController.navigate(R.id.modificaDati)
+            }
+            R.id.logout -> {
+                val modelAuth = AuthViewModel(this)
+                modelAuth.logOut()
+                navController.navigate(R.id.login)
+            }
+        }
+
+        return true
     }
 
 

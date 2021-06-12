@@ -57,7 +57,7 @@ class AuthViewModel(private val context: Context): ViewModel() {
     }
 
 
-    fun firebaseLogOut(){
+    fun logOut(){
         Firebase.auth.signOut()
     }
 

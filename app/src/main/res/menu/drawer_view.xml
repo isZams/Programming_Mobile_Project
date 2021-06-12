@@ -8,9 +8,9 @@
             android:icon="@mipmap/ic_launcher_round"
             android:title="Visualizza prenotazioni" />
         <item
-            android:id="@+id/nav_personal"
+            android:id="@+id/nav_update"
             android:icon="@mipmap/ic_launcher_round"
-            android:title="Visualizza i tuoi dati" />
+            android:title="Modifica i tuoi dati" />
         <item
             android:id="@+id/logout"
             android:icon="@mipmap/ic_launcher_round"
