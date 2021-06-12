@@ -1,4 +1,5 @@
 package com.example.programming_mobile_project.database
+import android.util.Log
 import com.example.programming_mobile_project.models.Utente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -28,11 +29,10 @@ class UtenteDB : FirebaseDB() {
      * @param id id dell'utente attuale
      * @param utente utente da aggiungere al database
      */
-    suspend fun addUtente(id: String, utente: Utente){
+    suspend fun addUtente(id: String, utente: Utente) {
         try {
             utenteRef.document(id).set(utente).await()
-        } catch (e: Exception) {
-        }
+        } catch (e: Exception) {}
     }
 
     /**

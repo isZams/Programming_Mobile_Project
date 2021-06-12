@@ -27,7 +27,6 @@ class AuthFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         val model = AuthViewModel(view.context)
-        //val txtUsername = view.findViewById<TextInputEditText>(R.id.textUsername)
         val txtUsername = view.findViewById<EditText>(R.id.textUsername)
         val txtPassword = view.findViewById<TextInputEditText>(R.id.textPassword)
         val txtNome = view.findViewById<TextInputEditText>(R.id.textNome)

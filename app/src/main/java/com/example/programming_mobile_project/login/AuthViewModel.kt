@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel(private val context: Context): ViewModel() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val userDB: UtenteDB ?= null
+    private val userDB = UtenteDB()
 
     fun signUp(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -60,10 +60,12 @@ class AuthViewModel(private val context: Context): ViewModel() {
 
     fun addAuthUserOnDB(utente: Utente){
         try {
-            val user = auth
+            val user = auth.currentUser
             viewModelScope.launch {
                 // launch è un bridge tra il mondo delle funzioni normali e quello delle coroutine
-                userDB?.addUtente(user.uid.toString(), utente)
+                if (user != null) {
+                    userDB.addUtente(user.uid, utente)
+                }
 
             }
         }catch (e: Exception){}
