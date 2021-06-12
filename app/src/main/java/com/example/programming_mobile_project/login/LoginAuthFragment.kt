@@ -1,12 +1,15 @@
 package com.example.programming_mobile_project.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.example.programming_mobile_project.R
 import com.google.android.material.textfield.TextInputEditText
@@ -33,12 +36,12 @@ class LoginAuthFragment: Fragment() {
         var pw: String
         var email: String
 
-        btnAccedi.setOnClickListener(){
-            //model.firebaseEmailSigin(email, pw)
+        btnAccedi.setOnClickListener{
             email = txtUsername.text.toString().trim()
             pw = txtPassword.text.toString().trim()
-            model.sigIn(email, pw)
-            view.findNavController().navigate(R.id.action_loginAuthFragment_to_HomePage)
+            if(email.isNotEmpty() && pw.isNotEmpty()) {
+                    model.sigIn(email, pw, view)
+            }
         }
 
     }
