@@ -1,6 +1,9 @@
 package com.example.programming_mobile_project.database
 
+import android.util.Log
+import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Prenotazione
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
@@ -9,6 +12,7 @@ import java.lang.Exception
 
 class PrenotazioneDB : FirebaseDB() {
     val prenotazioniRef = db.collection("prenotazioni")
+    val contatoreDB = ContatoreDB()
 
     /**
      *  Controlla se l'ombrellone è gia occupato e successivamente effettua la prenotazione
@@ -16,23 +20,30 @@ class PrenotazioneDB : FirebaseDB() {
      */
     suspend fun setPrenotazione(prenotazione: Prenotazione): String? {
         try {
-            val transaction = db.runTransaction {
-                prenotazioniRef
-                    .whereEqualTo("key_chalet", prenotazione.key_chalet)
-                    .whereEqualTo("n_ombrellone", prenotazione.n_ombrellone)
-                    .get()
-
-            }.await()
-            if (transaction.result.isEmpty) {
-                //ombrellone libero
-                val p = prenotazioniRef
-                    .add(prenotazione).await()
-                return p.id
+            val isFree = prenotazioniRef
+                .whereEqualTo("key_chalet", prenotazione.key_chalet)
+                .whereEqualTo("n_ombrellone", prenotazione.n_ombrellone)
+                .whereGreaterThan("data_termine_prenotazione", System.currentTimeMillis())
+                .limit(1)
+                .get().await().isEmpty
+            if (isFree) {
+                if (contatoreDB.updateContatore(
+                        prenotazione.key_chalet,
+                        Contatore(
+                            prenotazione.num_sedie,
+                            prenotazione.num_lettini,
+                            prenotazione.num_sdraie
+                        )
+                    ) == prenotazione.key_chalet
+                ) {
+                    return prenotazioniRef.add(prenotazione).await().id
+                }
+                return null
+            } else {
+                return null
             }
-            // ombrellone occupato
-            return null
         } catch (e: Exception) {
-            return null
+            return e.toString()
         }
     }
 

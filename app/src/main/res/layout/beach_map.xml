@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
@@ -14,13 +13,27 @@
             layout="@layout/beach_accessori_ombrellone"
             android:visibility="gone" />
 
+        <RelativeLayout
+            android:id="@+id/map_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
         <FrameLayout
             android:id="@+id/beach_map_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/beach_map_view_background_shape"
             android:elevation="8dp"
-            android:paddingTop="40dp">
+            android:paddingTop="40dp"
+            android:visibility="gone">
 
 
             <WebView

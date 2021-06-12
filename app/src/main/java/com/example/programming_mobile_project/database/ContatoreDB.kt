@@ -41,53 +41,32 @@ class ContatoreDB : FirebaseDB() {
     }
 
     /**
-     * Applica un delta al contatore dei lettini
-     * @param value delta (positivo o negativo) applicato al contatore. Di default vale 1
-     * @return "success" altrimenti null
+     * Aggiorna i contatori di uno chalet decrementandoli.
+     * @param quantita specifica di quanto i contatori devono essere decrementati (i valori devono essere positivi)
+     * @return [key_chalet] oppure null
      */
-    suspend fun incrementLettini(chaletKey: String, value: Long = 1): String? {
+    suspend fun updateContatore(key_chalet: String, quantita: Contatore): String? {
         return try {
             contatoreRef
-                .document(chaletKey)
-                .update("current_lettini", FieldValue.increment(value))
-                .await()
-            "success"
+                .document(key_chalet)
+                .update(
+                    hashMapOf<String, Any>(
+                        "current_lettini" to FieldValue.increment(
+                            quantita.current_lettini.unaryMinus().toLong()
+                        ),
+                        "current_sdraie" to FieldValue.increment(
+                            quantita.current_sdraie.unaryMinus().toLong()
+                        ),
+                        "current_sedie" to FieldValue.increment(
+                            quantita.current_sedie.unaryMinus().toLong()
+                        ),
+                    )
+                ).await()
+            key_chalet
         } catch (e: Exception) {
             null
         }
-    }
 
-    /**
-     * Applica un delta al contatore delle sedie
-     * @param value delta (positivo o negativo) applicato al contatore. Di default vale 1
-     * @return "success" altrimenti null
-     */
-    suspend fun incrementSedie(chaletKey: String, value: Long = 1): String? {
-        return try {
-            contatoreRef
-                .document(chaletKey)
-                .update("current_sedie", FieldValue.increment(value))
-                .await()
-            "success"
-        } catch (e: Exception) {
-            null
-        }
-    }
 
-    /**
-     * Applica un delta al contatore delle sdraie
-     * @param value delta (positivo o negativo) applicato al contatore. Di default vale 1
-     * @return "success" altrimenti null
-     */
-    suspend fun incrementSdraie(chaletKey: String, value: Long = 1): String? {
-        return try {
-            contatoreRef
-                .document(chaletKey)
-                .update("current_sdraie", FieldValue.increment(value))
-                .await()
-            "success"
-        } catch (e: Exception) {
-            null
-        }
     }
 }

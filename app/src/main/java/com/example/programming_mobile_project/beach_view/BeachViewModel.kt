@@ -1,6 +1,7 @@
 package com.example.programming_mobile_project.beach_view
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.example.programming_mobile_project.database.ListinoDB
 import com.example.programming_mobile_project.database.PrenotazioneDB
 import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Listino
+import com.example.programming_mobile_project.models.Prenotazione
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.launch
@@ -33,7 +35,7 @@ class BeachViewModel : ViewModel() {
     val svgDownloaded: LiveData<String>
         get() = _svgDownloaded
 
-    val _ombrello = MutableLiveData<Int>()
+    private val _ombrello = MutableLiveData<Int>()
     val ombrello: LiveData<Int>
         get() = _ombrello
 
@@ -48,6 +50,10 @@ class BeachViewModel : ViewModel() {
     private val _contatore = MutableLiveData<Contatore?>()
     val contatore: LiveData<Contatore?>
         get() = _contatore
+
+    private val _idPrenotazione = MutableLiveData<String?>()
+    val idPrenotazione: LiveData<String?>
+        get() = _idPrenotazione
 
     /**
      * lambda function necessaria per poter essere passata al costruttore di MapJSInterface
@@ -120,6 +126,13 @@ class BeachViewModel : ViewModel() {
     fun loadContatori(chaletKey: String) {
         viewModelScope.launch {
             _contatore.value = contatoreDB.getContatore(chaletKey)
+        }
+    }
+
+    fun prenota(prenotazione: Prenotazione) {
+        viewModelScope.launch {
+            _idPrenotazione.value = prenotazioneDB.setPrenotazione(prenotazione)
+            Log.i("ditto", _idPrenotazione.value.toString())
         }
     }
 }
