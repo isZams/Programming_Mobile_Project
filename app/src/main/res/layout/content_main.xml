@@ -11,7 +11,6 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -20,7 +19,7 @@
         android:theme="@style/Theme.Programming_Mobile_Project"
         app:layout_constraintBottom_toTopOf="@id/nav_host_fragment"
         app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
-        app:navigationIcon="?homeAsUpIndicator" />
+        />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
