@@ -3,12 +3,15 @@ package com.example.programming_mobile_project
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,9 +19,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.example.programming_mobile_project.database.UtenteDB
 import com.example.programming_mobile_project.login.AuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -33,18 +38,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_view)
         val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
+        drawer = findViewById(R.id.drawer_layout)
 
+        val utenteDB = UtenteDB()
+        lifecycleScope.launch {
+            val utente = utenteDB.getUtente()
+            Log.i("ditto", utente.toString())
+            if (utente != null)
+                drawer.findViewById<TextView>(R.id.drawerTitle).text =
+                    "${utente.nome} ${utente.cognome}"
+        }
 
         /**
          * Inietta le componenti per la toolbar e il drawer in modo da mostrare il tasto indietro nei fragment successivi alla HomePage
          */
         setSupportActionBar(toolbar)
-        drawer = findViewById(R.id.drawer_layout)
-        appBarConfiguration = AppBarConfiguration(topLevelDestinationIds = setOf(R.id.HomePage), drawerLayout = drawer)
+
+        appBarConfiguration = AppBarConfiguration(
+            topLevelDestinationIds = setOf(R.id.HomePage),
+            drawerLayout = drawer
+        )
         findViewById<Toolbar>(R.id.main_toolbar)
-                .setupWithNavController(navController, appBarConfiguration)
+            .setupWithNavController(navController, appBarConfiguration)
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNav.setOnNavigationItemSelectedListener OnNavigationItemSelectedListener@{ item ->
@@ -77,7 +94,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.logout -> {
                 val modelAuth = AuthViewModel()
                 modelAuth.logOut()
-                navController.navigate(R.id.login)
+                //TODO sostituire con id activity accesso
+                navController.navigate(R.id.loginAuthFragment)
             }
         }
 
