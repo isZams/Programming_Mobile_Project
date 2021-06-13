@@ -56,6 +56,10 @@
         <argument
             android:name="chaletId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_chaletFragment_to_beachFragment"
+            app:destination="@id/beachFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -63,8 +67,16 @@
         android:name="com.example.programming_mobile_project.beach_view.BeachFragment"
         android:label="BeachFragment"
         tools:layout="@layout/beach_map">
+        <argument
+            android:name="chaletKey"
+            app:argType="string" />
+        <argument
+            android:name="durata"
+            app:argType="integer" />
         <action
             android:id="@+id/action_beachFragment_to_prenotazione"
+            app:popUpTo="@id/beachFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/prenotazione" />
     </fragment>
 
@@ -77,13 +89,13 @@
             android:id="@+id/action_loginAuthFragment_to_HomePage"
             app:destination="@id/HomePage"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/modificaDati"
         android:name="com.example.programming_mobile_project.user.modifica_dati.ModificaDati"
         android:label="ModificaDati"
-        tools:layout="@layout/modifica_dati_fragment"/>
+        tools:layout="@layout/modifica_dati_fragment" />
 
 </navigation>

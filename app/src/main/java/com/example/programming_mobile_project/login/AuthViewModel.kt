@@ -16,6 +16,8 @@ class AuthViewModel() : ViewModel() {
 
     fun isLoggedIn(): Boolean = auth.currentUser?.uid.isNullOrBlank().not()
 
+    fun uid(): String? = auth.currentUser?.uid
+
     suspend fun signUp(email: String, password: String): FirebaseUser? {
         return try {
             val response = auth.createUserWithEmailAndPassword(email, password).await()

@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.R
@@ -47,9 +48,27 @@ class ChaletFragment : Fragment() {
             LocationServices.getFusedLocationProviderClient(this.requireContext())
         binding = DataBindingUtil.inflate(inflater, R.layout.chalet_fragment, container, false)
 
+        binding.prenotaGiornaliero.setOnClickListener {
+            goToMappaOmbrelloni(1)
+        }
+
+        binding.prenotaMensile.setOnClickListener {
+            goToMappaOmbrelloni(30)
+        }
+
+
 
 
         return binding.root
+    }
+
+    fun goToMappaOmbrelloni(giorni: Int) {
+        findNavController().navigate(
+            ChaletFragmentDirections.actionChaletFragmentToBeachFragment(
+                args.chaletId,
+                giorni
+            )
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
