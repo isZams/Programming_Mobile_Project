@@ -37,7 +37,7 @@ class AuthViewModel() : ViewModel() {
     }
 
     fun logOut() {
-        Firebase.auth.signOut()
+        auth.signOut()
     }
 
     suspend fun addAuthUserOnDB(utente: Utente) {
@@ -46,8 +46,7 @@ class AuthViewModel() : ViewModel() {
             if (user != null) {
                 userDB.addUtente(user.uid, utente)
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
         }
     }
 }
