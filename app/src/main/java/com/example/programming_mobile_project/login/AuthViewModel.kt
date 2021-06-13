@@ -9,7 +9,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-
 class AuthViewModel() : ViewModel() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -35,7 +34,6 @@ class AuthViewModel() : ViewModel() {
         }
     }
 
-
     fun logOut() {
         Firebase.auth.signOut()
     }
@@ -46,11 +44,8 @@ class AuthViewModel() : ViewModel() {
             if (user != null) {
                 userDB.addUtente(user.uid, utente)
             }
-
-        } catch (e: Exception) {
         }
-
+        catch (e: Exception) {
+        }
     }
-
-
 }

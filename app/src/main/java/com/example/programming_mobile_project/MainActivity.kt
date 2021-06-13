@@ -15,8 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.programming_mobile_project.Home_Page.HomePage
+import androidx.navigation.ui.setupWithNavController
 import com.example.programming_mobile_project.login.AuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var drawer: DrawerLayout
     private lateinit var navController: NavController
-    private lateinit var appBarConfiguration :AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +33,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_view)
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        setSupportActionBar(toolbar)
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        /**
+         * Inietta le componenti per la toolbar e il drawer in modo da mostrare il tasto indietro nei fragment successivi alla HomePage
+         */
+        setSupportActionBar(toolbar)
+        drawer = findViewById(R.id.drawer_layout)
+        appBarConfiguration = AppBarConfiguration(topLevelDestinationIds = setOf(R.id.HomePage), drawerLayout = drawer)
+        findViewById<Toolbar>(R.id.main_toolbar)
+                .setupWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNav.setOnNavigationItemSelectedListener OnNavigationItemSelectedListener@{ item ->
             when (item.itemId) {
                 R.id.item1 -> {
-                    navController.navigate(R.id.HomePage)
+                    navController.popBackStack(R.id.HomePage, false)
                     true
                 }
                 R.id.item2 -> {
@@ -55,11 +60,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 else -> false
             }
         }
-
         val drawerNav = findViewById<NavigationView>(R.id.nav_view)
-        drawer = findViewById(R.id.drawer_layout)
         drawerNav.setNavigationItemSelectedListener(this)
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -98,4 +100,3 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
-
