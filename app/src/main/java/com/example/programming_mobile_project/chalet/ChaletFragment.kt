@@ -1,3 +1,5 @@
+package com.example.programming_mobile_project.chalet
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -39,16 +41,15 @@ class ChaletFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(this.requireContext())
-        getLastLocation()
-        val view = inflater.inflate(R.layout.chalet_fragment, container, false)
-        binding =
-            DataBindingUtil.setContentView(requireActivity(),R.layout.chalet_fragment)
+        binding = DataBindingUtil.inflate(inflater, R.layout.chalet_fragment, container, false)
 
-        return view
+
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class ChaletFragment : Fragment() {
         Glide.with(this)
             .load(R.drawable.loading)
             .into(binding.immagineChalet)
-        var destination: String = ""
+        var destination = ""
         val chaletId = args.chaletId
         val chaletDB = ChaletDB()
         chaletDB.getChalet(chaletId)
@@ -80,10 +81,11 @@ class ChaletFragment : Fragment() {
 
         val btnMaps: Button = binding.bottoneMaps
         // al click del bottone chiama la funzione displayTrack
-        btnMaps.setOnClickListener{
+        btnMaps.setOnClickListener {
             DisplayTrack(getLastLocation(), destination)
         }
     }
+
 
     /**
      * Dopo aver passato i due paremtri, viene lanciato un intent con cui apre GoogleMaps, msotrando
@@ -98,7 +100,7 @@ class ChaletFragment : Fragment() {
         try {
             val uri: Uri =
                 Uri.parse("https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end)
-            val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setPackage("com.google.android.apps.maps")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
@@ -106,7 +108,7 @@ class ChaletFragment : Fragment() {
         } catch (e: ActivityNotFoundException) {
             val uri: Uri =
                 Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps")
-            val intent: Intent = Intent(Intent.ACTION_VIEW, uri)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }

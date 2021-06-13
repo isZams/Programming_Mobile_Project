@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/AuthFragment">
+    app:startDestination="@id/loginAuthFragment">
 
     <fragment
         android:id="@+id/AuthFragment"
@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/chaletFragment"
-        android:name="ChaletFragment"
+        android:name="com.example.programming_mobile_project.chalet.ChaletFragment"
         android:label="ChaletFragment"
         tools:layout="@layout/chalet_fragment">
         <argument
