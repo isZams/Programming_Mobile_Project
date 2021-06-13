@@ -1,6 +1,5 @@
 package com.example.programming_mobile_project.login
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.programming_mobile_project.database.UtenteDB
 import com.example.programming_mobile_project.models.Utente
@@ -27,7 +26,7 @@ class AuthViewModel() : ViewModel() {
         }
     }
 
-    suspend fun sigIn(email: String, password: String, view: View): FirebaseUser? {
+    suspend fun sigIn(email: String, password: String): FirebaseUser? {
         return try {
             val signin = auth.signInWithEmailAndPassword(email, password).await()
             signin.user
