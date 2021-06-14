@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_HomePage_to_chaletFragment"
             app:destination="@id/chaletFragment" />
+        <action
+            android:id="@+id/action_HomePage_to_modificaDati"
+            app:destination="@id/modificaDati" />
+        <action
+            android:id="@+id/action_HomePage_to_elencoPrenotazioni"
+            app:destination="@id/elencoPrenotazioni" />
     </fragment>
 
     <fragment
