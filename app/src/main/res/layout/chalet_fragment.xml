@@ -35,7 +35,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                    android:textColor="@color/black"
                     android:textSize="43sp"
                     android:textStyle="bold" />
 
@@ -54,7 +53,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/descrizione"
-                    android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
@@ -75,7 +73,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/info"
-                    android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
@@ -95,7 +92,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:text="@string/lettini"
                             android:textAlignment="center" />
@@ -105,7 +101,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:textAlignment="center" />
                     </TableRow>
@@ -119,7 +114,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:text="@string/ombrelloni"
                             android:textAlignment="center" />
@@ -129,7 +123,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:textAlignment="center" />
 
@@ -143,7 +136,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:text="@string/sdraio"
                             android:textAlignment="center" />
@@ -153,7 +145,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:textAlignment="center" />
                     </TableRow>
@@ -166,7 +157,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:text="@string/sedie"
                             android:textAlignment="center" />
@@ -176,7 +166,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/border"
                             android:padding="4dp"
                             android:textAlignment="center" />
                     </TableRow>
