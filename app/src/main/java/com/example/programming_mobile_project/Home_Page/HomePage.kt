@@ -11,9 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.HomePageBinding
 
-
+/**
+Fragment della HomePage dove vengono visualizzati tutti gli chalet prensenti nel database
+ */
 class HomePage : Fragment() {
 
+    /**
+     * OnCreateView utilizza il databinding per l'inflate del layout home_page e per l'inizializzazione della recyclerView
+     * @return binding.root layout associato con il binding
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

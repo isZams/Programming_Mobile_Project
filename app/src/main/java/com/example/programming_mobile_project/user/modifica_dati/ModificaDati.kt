@@ -16,11 +16,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.ModificaDatiFragmentBinding
 
-
+/**
+Fragment della pagina modifica dati utente dove vengono visualizzati i dati dell'utente con la possibilità di modificarli
+ */
 class ModificaDati : Fragment() {
     private lateinit var binding: ModificaDatiFragmentBinding
     private val viewmodel : ModificaDatiViewModel by viewModels()
 
+    /**
+    effettua l'inflate del layout modifica_dati_fragment
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
