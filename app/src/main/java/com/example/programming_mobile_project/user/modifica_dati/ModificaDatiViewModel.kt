@@ -1,17 +1,8 @@
 package com.example.programming_mobile_project.user.modifica_dati
 
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.programming_mobile_project.database.UtenteDB
 import com.example.programming_mobile_project.models.Utente
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,22 +12,30 @@ class ModificaDatiViewModel: ViewModel() {
     val user: LiveData<Utente>
         get() = _user
     private val utenteDB = UtenteDB()
+    private val _success = MutableLiveData<Boolean>()
+    val success: LiveData<Boolean>
+        get() = _success
 
     fun getUser(){
         viewModelScope.launch() {
             _user.value = utenteDB.getUtente()
-            Log.d("Deb", "Utente recuperato: " + user.value?.nome)
         }
     }
 
+    /**
+     * Metodo che sfrutta la classe UtenteDB per effettuare una modifica nel database del nome e del cognome
+     * dell'utente attualmente autenticato. Se la modifica ha successo allora aggiorna il livedata success con true
+     * altrimenti se c'è stato un errore mette false
+     * @param nome nome modificato
+     * @param cognome cognome modificato
+     */
     fun inviaModifiche(nome: String, cognome: String){
         viewModelScope.launch(Dispatchers.IO) {
-            utenteDB.modificaUtente(Utente(nome, cognome))
+             _success.postValue(utenteDB.modificaUtente(Utente(nome, cognome)))
         }
     }
 
     fun resetPassword(){
         utenteDB.resetPassword()
     }
-
 }

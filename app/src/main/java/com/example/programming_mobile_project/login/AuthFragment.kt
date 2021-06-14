@@ -1,17 +1,17 @@
 package com.example.programming_mobile_project.login
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import com.example.programming_mobile_project.MainActivity
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.models.Utente
 import com.google.android.material.textfield.TextInputEditText
@@ -38,7 +38,6 @@ class AuthFragment : Fragment() {
         val txtNome = view.findViewById<TextInputEditText>(R.id.textNome)
         val txtCognome = view.findViewById<TextInputEditText>(R.id.textCognome)
         val btnRegistrati = view.findViewById<Button>(R.id.btnRegistrati)
-        val txtgoToLogin = view.findViewById<TextView>(R.id.login)
 
         var pw: String
         var email: String
@@ -58,14 +57,12 @@ class AuthFragment : Fragment() {
                     } else {
                         utente = Utente(nome, cognome)
                         model.addAuthUserOnDB(utente)
-                        view.findNavController().navigate(R.id.action_loginAuthFragment_to_HomePage)
+                        val intent = Intent(context, MainActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
                     }
                 }
             }
-        }
-
-        txtgoToLogin.setOnClickListener() {
-            view.findNavController().navigate(R.id.action_AuthFragment_to_loginAuthFragment)
         }
     }
 

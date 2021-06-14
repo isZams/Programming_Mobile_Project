@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/login_nav_graph"
+    app:startDestination="@id/loginAuthFragment2">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.programming_mobile_project.login.AuthFragment"
+        android:label="AuthFragment" />
+    <fragment
+        android:id="@+id/loginAuthFragment2"
+        android:name="com.example.programming_mobile_project.login.LoginAuthFragment"
+        android:label="LoginAuthFragment" >
+        <action
+            android:id="@+id/action_loginAuthFragment2_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+</navigation>

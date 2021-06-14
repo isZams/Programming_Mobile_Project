@@ -41,11 +41,13 @@ class UtenteDB : FirebaseDB() {
      * contenute nel database
      * @param utente informazioni utente da modificare
      */
-    suspend fun modificaUtente(utente: Utente) {
+    suspend fun modificaUtente(utente: Utente): Boolean{
         try {
             utenteRef.document(key_user).set(utente).await()
         } catch (e: Exception) {
+            return false
         }
+        return true
     }
 
     /**

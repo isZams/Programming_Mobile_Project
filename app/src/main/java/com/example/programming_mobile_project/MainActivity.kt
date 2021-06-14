@@ -81,6 +81,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerNav.setNavigationItemSelectedListener(this)
     }
 
+    /**
+     * Nel caso si prema logout allora viene terminata la MainActivity e viene avviata
+     * con un intent la LoginActivity
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawer.closeDrawer(GravityCompat.START)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -94,11 +98,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.logout -> {
                 val modelAuth = AuthViewModel()
                 modelAuth.logOut()
-                //TODO sostituire con id activity accesso
-                navController.navigate(R.id.loginAuthFragment)
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                this.finish()
             }
         }
-
         return true
     }
 
