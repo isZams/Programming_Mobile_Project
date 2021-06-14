@@ -90,10 +90,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = findNavController(R.id.nav_host_fragment)
         when (item.itemId) {
             R.id.nav_prenotation -> {
-                navController.navigate(R.id.elencoPrenotazioni)
+                navController.navigate(R.id.action_HomePage_to_elencoPrenotazioni)
             }
             R.id.nav_update -> {
-                navController.navigate(R.id.modificaDati)
+                navController.navigate(R.id.action_HomePage_to_modificaDati)
             }
             R.id.logout -> {
                 val modelAuth = AuthViewModel()
