@@ -54,5 +54,6 @@ class UtenteDB : FirebaseDB() {
     fun resetPassword(){
         Firebase.auth.currentUser?.email?.let { Firebase.auth.sendPasswordResetEmail(it) }
     }
+
 }
 

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navController = navHostFragment.findNavController()
         setSupportActionBar(findViewById<Toolbar>(R.id.main_toolbar))
         setupActionBarWithNavController(navController)
-
         bottomNav.setOnNavigationItemSelectedListener OnNavigationItemSelectedListener@{ item ->
             when (item.itemId) {
                 R.id.item1 -> {
@@ -58,11 +59,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawer.closeDrawer(GravityCompat.START)
         val navController = findNavController(R.id.nav_host_fragment)
-        when (item.itemId) {
+        when (item.itemId){
             R.id.nav_prenotation -> {
                 navController.navigate(R.id.elencoPrenotazioni)
             }
-            R.id.nav_update -> {
+            R.id.nav_update ->{
                 navController.navigate(R.id.modificaDati)
             }
             R.id.logout -> {
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         return true
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
