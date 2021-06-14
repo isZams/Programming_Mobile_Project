@@ -47,10 +47,10 @@ class PrenotazioneFragment : Fragment() {
     }
 
     private val observerPrenotazione = Observer<Prenotazione> {
-        binding.txtLettini.text = it.num_lettini.toString()
+        binding.txtLettini.text = if(it.num_lettini.toString().isEmpty()) "0" else it.num_lettini.toString()
         binding.txtOmbrellone.text = it.n_ombrellone.toString()
-        binding.txtSdraio.text = it.num_sdraie.toString()
-        binding.txtSedie.text = it.num_sedie.toString()
+        binding.txtSdraio.text = if(it.num_sdraie.toString().isEmpty()) "0" else it.num_sdraie.toString()
+        binding.txtSedie.text = if(it.num_sedie.toString().isEmpty()) "0" else it.num_sedie.toString()
         binding.txtDataEffettuata.text = it.timeStampToString(it.timestamp_prenotazione)
         binding.txtTerminePrenotazione.text = it.timeStampToString(it.data_termine_prenotazione)
         binding.txtTotale.text = it.tot.toString()
