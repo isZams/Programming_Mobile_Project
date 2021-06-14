@@ -13,10 +13,16 @@ import com.example.programming_mobile_project.R
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 
+/**
+     fragment utilizzato per la pagina Login.
+ */
 class LoginAuthFragment : Fragment() {
     private lateinit var model: AuthViewModel
 
-
+    /**
+     * onCreateView utilizzato per l'inflate layout di login_interface (layout pagina login)
+     * @return inflate layout login_interface
+    */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +37,12 @@ class LoginAuthFragment : Fragment() {
         return inflater.inflate(R.layout.login_interface, container, false)
     }
 
+    /**
+    * onViewCreated eseguito dopo la creazione del Fragment. Utilizzato per inizializzare gli elementi del layout a cui fa riferimento
+    * bottone accedi che controlla se gli elementi InputEditText non sono vuoti allora lancia la funzione signIn del viewModel associato per il login dell'utente e
+    * se questa è andata a buon fine l'utente verrà trasportato alla HomePage
+    * lifecycleScope utilizzato per lanciare la coroutine
+    */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

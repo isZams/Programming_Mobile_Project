@@ -15,6 +15,9 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+view model che gestisce la logica per la form di modifica dati utente
+ */
 class ModificaDatiViewModel: ViewModel() {
 
     private val _user = MutableLiveData(Utente())
@@ -22,6 +25,10 @@ class ModificaDatiViewModel: ViewModel() {
         get() = _user
     private val utenteDB = UtenteDB()
 
+    /**
+    funzione per prelevare le informazioni dell'utente specifico e popolare la LiveData
+    vieModelScope fa parte di CoroutineScope e viene utilizzato per lanciare le coroutine all'interno del viewModel
+     */
     fun getUser(){
         viewModelScope.launch() {
             _user.value = utenteDB.getUtente()
@@ -29,12 +36,19 @@ class ModificaDatiViewModel: ViewModel() {
         }
     }
 
+    /**
+    * @param nome dell'utente loggato
+    * @param cognome dell'utente loggato
+    lancio della funzione per la modifica delle informazioni dell'utente
+     */
     fun inviaModifiche(nome: String, cognome: String){
         viewModelScope.launch(Dispatchers.IO) {
             utenteDB.modificaUtente(Utente(nome, cognome))
         }
     }
-
+    /**
+    funzione per il reset della password dell'utente loggato
+     */
     fun resetPassword(){
         utenteDB.resetPassword()
     }

@@ -17,10 +17,18 @@ import com.example.programming_mobile_project.models.Utente
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 
+/**
+     fragment utilizzato per la pagina Registrati.
+ */
+
 class AuthFragment : Fragment() {
 
     private lateinit var utente: Utente
 
+    /**
+    * onCreateView utilizzato per l'inflate layout di google_login (layout pagina registrati)
+    * @return inflate layout google_login
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +36,14 @@ class AuthFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.google_login, container, false)
     }
+
+    /**
+    * onViewCreated eseguito dopo la creazione del Fragment. Utilizzato per inizializzare gli elementi del layout a cui fa riferimento
+    * bottone registrati che controlla se gli elementi InputEditText non sono vuoti allora lancia la funzione signUp del viewModel associato per la registrazione dell'utente e
+    * se questa è andata a buon fine prende le credenziali dell'utente e le registra nel Cloud Storage di Firebase
+    * lifecycleScope utilizzato per lanciare la coroutine
+    * se l'utente è già registrato cliccando su Login verrà trasportato alla pagina di login dove potrà autenticarsi
+    */
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
