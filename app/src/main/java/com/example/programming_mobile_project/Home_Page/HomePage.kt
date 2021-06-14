@@ -12,10 +12,13 @@ import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.HomePageBinding
 
 
+class HomePage : Fragment() {
 
-class HomePage: Fragment(){
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding: HomePageBinding =
             DataBindingUtil.inflate(
                 inflater,

@@ -1,6 +1,5 @@
 package com.example.programming_mobile_project.login
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.programming_mobile_project.database.UtenteDB
 import com.example.programming_mobile_project.models.Utente
@@ -10,13 +9,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-
 class AuthViewModel() : ViewModel() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userDB = UtenteDB()
 
     fun isLoggedIn(): Boolean = auth.currentUser?.uid.isNullOrBlank().not()
+
+    fun uid(): String? = auth.currentUser?.uid
 
     suspend fun signUp(email: String, password: String): FirebaseUser? {
         return try {
@@ -27,7 +27,7 @@ class AuthViewModel() : ViewModel() {
         }
     }
 
-    suspend fun sigIn(email: String, password: String, view: View): FirebaseUser? {
+    suspend fun sigIn(email: String, password: String): FirebaseUser? {
         return try {
             val signin = auth.signInWithEmailAndPassword(email, password).await()
             signin.user
@@ -36,9 +36,8 @@ class AuthViewModel() : ViewModel() {
         }
     }
 
-
     fun logOut() {
-        Firebase.auth.signOut()
+        auth.signOut()
     }
 
     suspend fun addAuthUserOnDB(utente: Utente) {
@@ -47,11 +46,7 @@ class AuthViewModel() : ViewModel() {
             if (user != null) {
                 userDB.addUtente(user.uid, utente)
             }
-
         } catch (e: Exception) {
         }
-
     }
-
-
 }

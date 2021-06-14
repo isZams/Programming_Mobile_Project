@@ -1,219 +1,219 @@
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="10dp">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/immagine_chalet"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="220dp"
-                android:contentDescription="@string/immagine_chalet"
-                android:scaleType="fitCenter"
-                android:layout_marginRight="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="3dp"
-                app:shapeAppearance="@style/roundimageview"/>
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/immagine_chalet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:contentDescription="@string/immagine_chalet"
+                    android:maxHeight="220dp"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearance="@style/roundimageview" />
 
                 <TextView
                     android:id="@+id/nome_chalet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                     android:textColor="@color/black"
-                    android:textSize="43dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:textSize="43sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/indirizzo_chalet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_marginTop="3dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="26dp"
                     android:text="@string/descrizione"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"/>
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
 
 
                 <TextView
                     android:id="@+id/descrizione_chalet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="20sp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/info"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="26dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
 
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-
-                <TableRow
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lettini"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tot_lettini"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
-                </TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:text="@string/lettini"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/tot_lettini"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </TableRow>
 
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ombrelloni"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:text="@string/ombrelloni"
+                            android:textAlignment="center" />
 
-                    <TextView
-                        android:id="@+id/tot_ombrelloni"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
+                        <TextView
+                            android:id="@+id/tot_ombrelloni"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
 
-                </TableRow>
+                    </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/sdraio"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:text="@string/sdraio"
+                            android:textAlignment="center" />
 
-                    <TextView
-                        android:id="@+id/tot_sdraio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
-                </TableRow>
+                        <TextView
+                            android:id="@+id/tot_sdraio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/sedie"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:text="@string/sedie"
+                            android:textAlignment="center" />
 
-                    <TextView
-                        android:id="@+id/tot_sedie"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:textAlignment="center"
-                        android:padding="4dp"/>
-                </TableRow>
+                        <TextView
+                            android:id="@+id/tot_sedie"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </TableRow>
 
-            </TableLayout>
+                </TableLayout>
 
                 <Button
                     android:id="@+id/prenota_giornaliero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/prenota_giornaliero"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/prenota_giornaliero" />
 
                 <Button
                     android:id="@+id/prenota_mensile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/prenota_mensile"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/prenota_mensile" />
 
                 <Button
                     android:id="@+id/bottone_maps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/view_maps"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/view_maps">
 
                 </Button>
 
-        </LinearLayout>
+            </LinearLayout>
         </ScrollView>
     </FrameLayout>
 
-     </layout>
+</layout>

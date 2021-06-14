@@ -18,8 +18,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.databinding.BeachMapBinding
+import com.example.programming_mobile_project.login.AuthViewModel
 import com.example.programming_mobile_project.models.Contatore
 import com.example.programming_mobile_project.models.Listino
 import com.example.programming_mobile_project.models.Prenotazione
@@ -27,6 +29,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.lang.NumberFormatException
+import java.time.LocalDate
+import java.time.ZoneOffset
 
 /**
  * Al caricamento del fragment viene lanciato viewModel.getSvg. Nell'observer relativo a getSvg,
@@ -38,6 +42,7 @@ import java.lang.NumberFormatException
  */
 class BeachFragment : Fragment() {
     private lateinit var binding: BeachMapBinding
+    private val args: BeachFragmentArgs by navArgs()
 
     private lateinit var chaletKey: String
     val viewModel: BeachViewModel by viewModels()
@@ -57,7 +62,13 @@ class BeachFragment : Fragment() {
 
         setUpWebLayout()
 
-        chaletKey = "GcZn37MhMnXkIyC0DxnQ"
+        binding.showExtra.setOnClickListener {
+            binding.extra.visibility =
+                if (binding.extra.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+
+        chaletKey = args.chaletKey
+
         var pathSvg = ""
         var currentListino = Listino()
 
@@ -80,7 +91,7 @@ class BeachFragment : Fragment() {
         val svgObserver = Observer<String> {
             if (it != "fail") {
                 pathSvg = it
-                viewModel.getOccupati(chaletKey)
+                viewModel.getOccupati(args.chaletKey)
             } else {
                 Log.e("error", "svg non trovata")
             }
@@ -158,26 +169,7 @@ class BeachFragment : Fragment() {
             }
         }
 
-        //serve per mostrare il bottone nella toolbar
-        setHasOptionsMenu(true)
-
         return binding.root
-    }
-
-    // TODO da controllare correttezza di questa toolbar messa prima della toolbar presente in activity
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.beach_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.showExtra -> {
-                binding.extra.visibility =
-                    if (binding.extra.visibility == View.GONE) View.VISIBLE else View.GONE
-            }
-        }
-        return true
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -280,8 +272,10 @@ class BeachFragment : Fragment() {
     }
 
     fun makePrenotazione(prezzoOmbrellone: Float) {
-        binding.mapProgressBar.visibility = View.VISIBLE
         binding.beachMapView.visibility = View.GONE
+        binding.extra.visibility = View.GONE
+        binding.mapProgressBar.visibility = View.VISIBLE
+
 
         var totale = prezzoOmbrellone
         totale += binding.extra.findViewById<TextView>(R.id.prezzo_tot_sdraie).text.toString()
@@ -292,11 +286,11 @@ class BeachFragment : Fragment() {
             .toFloatOrNull() ?: 0f
 
 
-        // TODO cambiare il primo parametro nel costruttore di Prenotazione (è data termine prenotazione)
+        // DateTime di oggi con ora 00:00:00
+        val oggi = LocalDate.now().atStartOfDay(ZoneOffset.systemDefault())
         viewModel.prenota(
             Prenotazione(
-                // 86400000 ms = 1 giorno
-                System.currentTimeMillis() + 86400000,
+                oggi.plusDays(args.durata.toLong()).toInstant().toEpochMilli(),
                 System.currentTimeMillis(),
                 binding.extra.findViewById<TextView>(R.id.n_ombrello_selected).text.toString()
                     .toInt(),
@@ -306,7 +300,7 @@ class BeachFragment : Fragment() {
                     ?: 0,
                 binding.extra.findViewById<TextView>(R.id.editLettini).text.toString().toIntOrNull()
                     ?: 0,
-                "key_utente",
+                AuthViewModel().uid()!!,
                 chaletKey,
                 totale,
             )

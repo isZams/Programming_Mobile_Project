@@ -1,5 +1,5 @@
 package com.example.programming_mobile_project.database
-import android.util.Log
+
 import com.example.programming_mobile_project.models.Utente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -32,7 +32,8 @@ class UtenteDB : FirebaseDB() {
     suspend fun addUtente(id: String, utente: Utente) {
         try {
             utenteRef.document(id).set(utente).await()
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+        }
     }
 
     /**
@@ -40,18 +41,18 @@ class UtenteDB : FirebaseDB() {
      * contenute nel database
      * @param utente informazioni utente da modificare
      */
-    suspend fun modificaUtente(utente: Utente){
-        try{
+    suspend fun modificaUtente(utente: Utente) {
+        try {
             utenteRef.document(key_user).set(utente).await()
+        } catch (e: Exception) {
         }
-        catch (e: Exception){}
     }
 
     /**
      * Funzione che in automatico prende l'utente autenticato e invia alla propria mail la procedura
      * di ripristino della password
      */
-    fun resetPassword(){
+    fun resetPassword() {
         Firebase.auth.currentUser?.email?.let { Firebase.auth.sendPasswordResetEmail(it) }
     }
 
