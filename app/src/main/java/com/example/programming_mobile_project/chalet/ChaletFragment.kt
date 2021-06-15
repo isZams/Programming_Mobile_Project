@@ -21,15 +21,15 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.database.ChaletDB
 import com.example.programming_mobile_project.databinding.ChaletFragmentBinding
-import com.example.programming_mobile_project.models.Chalet
 import com.google.android.gms.location.*
+import kotlinx.coroutines.launch
 
 
 class ChaletFragment : Fragment() {
@@ -79,24 +79,20 @@ class ChaletFragment : Fragment() {
         var destination = ""
         val chaletId = args.chaletId
         val chaletDB = ChaletDB()
-        chaletDB.getChalet(chaletId)
-        val chaletObserver = Observer<Chalet> { chalet ->
-            Glide.with(this)
-                .load(chalet.locandina)
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(binding.immagineChalet)
-            binding.nomeChalet.text = chalet.nome_chalet
-            binding.indirizzoChalet.text = chalet.indirizzo
-            binding.descrizioneChalet.text = chalet.descrizione
-            binding.totLettini.text = chalet.tot_lettini.toString()
-            binding.totOmbrelloni.text = chalet.tot_ombrelloni.toString()
-            binding.totSdraio.text = chalet.tot_sdraio.toString()
-            binding.totSedie.text = chalet.tot_sedie.toString()
-            destination = chalet.indirizzo
+        lifecycleScope.launch {
+            val chalet = chaletDB.getChalet(chaletId)
+            chalet?.let {
+                binding.nomeChalet.text = chalet.nome_chalet
+                binding.indirizzoChalet.text = chalet.indirizzo
+                binding.descrizioneChalet.text = chalet.descrizione
+                binding.totLettini.text = chalet.tot_lettini.toString()
+                binding.totOmbrelloni.text = chalet.tot_ombrelloni.toString()
+                binding.totSdraio.text = chalet.tot_sdraio.toString()
+                binding.totSedie.text = chalet.tot_sedie.toString()
+                Glide.with(requireContext()).load(chalet.locandina).into(binding.immagineChalet)
+                destination = chalet.indirizzo
+            }
         }
-
-        chaletDB.selectedChalet.observe(viewLifecycleOwner, chaletObserver)
 
         val btnMaps: Button = binding.bottoneMaps
         // al click del bottone chiama la funzione displayTrack

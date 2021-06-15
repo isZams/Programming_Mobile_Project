@@ -132,7 +132,6 @@ class BeachViewModel : ViewModel() {
     fun prenota(prenotazione: Prenotazione) {
         viewModelScope.launch {
             _idPrenotazione.value = prenotazioneDB.setPrenotazione(prenotazione)
-            Log.i("ditto", _idPrenotazione.value.toString())
         }
     }
 }
