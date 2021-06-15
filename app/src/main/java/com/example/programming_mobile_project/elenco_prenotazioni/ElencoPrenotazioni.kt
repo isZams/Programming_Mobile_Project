@@ -13,8 +13,6 @@ import com.example.programming_mobile_project.databinding.ElencoPrenotazioniFrag
 
 class ElencoPrenotazioni : Fragment() {
 
-    private lateinit var viewModel: ElencoPrenotazioniViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

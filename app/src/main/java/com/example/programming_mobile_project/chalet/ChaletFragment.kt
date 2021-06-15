@@ -62,6 +62,10 @@ class ChaletFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * naviga al fragment per la prenotazione dell'ombrellone
+     * @param giorni numero di giorni di prenotazione dell'ombrellone
+     */
     fun goToMappaOmbrelloni(giorni: Int) {
         findNavController().navigate(
             ChaletFragmentDirections.actionChaletFragmentToBeachFragment(

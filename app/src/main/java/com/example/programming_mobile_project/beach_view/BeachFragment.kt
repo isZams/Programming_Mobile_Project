@@ -62,6 +62,7 @@ class BeachFragment : Fragment() {
 
         setUpWebLayout()
 
+        // Serve pre regolare la visibilità della form degli accessori
         binding.showExtra.setOnClickListener {
             binding.extra.visibility =
                 if (binding.extra.visibility == View.GONE) View.VISIBLE else View.GONE
@@ -72,6 +73,7 @@ class BeachFragment : Fragment() {
         var pathSvg = ""
         var currentListino = Listino()
 
+        // recupera l'oggetto listino dello chalet corrente e invoca loadContatori per recuperare i contatori
         val listinoObserver = Observer<Listino?> {
             if (it != null) {
                 currentListino = it
@@ -82,12 +84,14 @@ class BeachFragment : Fragment() {
 
         }
 
+        // recupera i contatori dello chalet corrente. Usa questi valori per definire le regole dell'EditText
         val contatoreObserver = Observer<Contatore?> {
             if (it != null) {
                 setUpBtnListener(it, currentListino)
             }
         }
 
+        // recupera il percorso in locale nella quale è stata salvata la mappa svg dello chalet
         val svgObserver = Observer<String> {
             if (it != "fail") {
                 pathSvg = it
@@ -97,6 +101,7 @@ class BeachFragment : Fragment() {
             }
         }
 
+        // ottiene la lista degli ombrelloni occupati dello chalet
         val occupatiObserver = Observer<List<Int>?> {
             if (it != null) {
                 ombrelloniOccupati.addAll(it)
@@ -104,6 +109,7 @@ class BeachFragment : Fragment() {
             }
         }
 
+        // ottiene lo "scheletro" html precedentemente scaricato dal viewModel dallo storage di firebase
         val htmlObserver = Observer<String> {
             val svgFile = File(pathSvg)
             val svgText = svgFile.readText()
@@ -116,6 +122,9 @@ class BeachFragment : Fragment() {
                 "UTF-8",
                 null
             )
+
+            // le operazioni di caricamenteo della pagina sono concluse e la pagina è pronta.
+            // termino la visualizzazione della progressbar e mostro il vero contenuto
             binding.mapProgressBar.visibility = View.GONE
             binding.beachMapView.visibility = View.VISIBLE
         }
@@ -172,6 +181,9 @@ class BeachFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Setta le varie impostazioni della webview
+     */
     @SuppressLint("SetJavaScriptEnabled")
     fun setUpWebLayout() {
         binding.webView.settings.javaScriptEnabled = true
@@ -201,6 +213,11 @@ class BeachFragment : Fragment() {
         }
     }
 
+    /**
+     * Definisce le regole dei 3 EditText degli accessori
+     * @param contatore le risorse disponibili allo chalet
+     * @param listino i prezzi dello chalet
+     */
     fun setUpBtnListener(contatore: Contatore, listino: Listino) {
         fun setEditText(editText: EditText, txtView: TextView, rimanenti: Int, prezzo: Float) {
             editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, rimanenti))
@@ -241,6 +258,10 @@ class BeachFragment : Fragment() {
 
     }
 
+    /**
+     * Invocata al click su 'prenota', mostra un dialog di conferma per la prenotazione fornendo
+     * un riepilogo dell'acquisto
+     */
     fun showDialogAcquisto(
         nOmbr: String,
         prezzoOmbrellone: Float,
@@ -271,6 +292,10 @@ class BeachFragment : Fragment() {
         }
     }
 
+    /**
+     * Prepara i dati da mandare al viewmodel per concludere la prenotazione
+     * @param prezzoOmbrellone prezzo dell'ombrellone derivato dal listino
+     */
     fun makePrenotazione(prezzoOmbrellone: Float) {
         binding.beachMapView.visibility = View.GONE
         binding.extra.visibility = View.GONE
@@ -284,6 +309,9 @@ class BeachFragment : Fragment() {
             .toFloatOrNull() ?: 0f
         totale += binding.extra.findViewById<TextView>(R.id.prezzo_tot_sedie).text.toString()
             .toFloatOrNull() ?: 0f
+        if (args.durata > 1) {
+            totale = ((totale * 30) * 0.75).toFloat()
+        }
 
 
         // DateTime di oggi con ora 00:00:00
