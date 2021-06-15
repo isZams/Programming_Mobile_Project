@@ -10,8 +10,8 @@ import com.example.programming_mobile_project.models.Prenotazione
 import kotlinx.coroutines.launch
 
 class PrenotazioneViewModel : ViewModel() {
-    val prenotazioneDB = PrenotazioneDB()
-    val chaletDB = ChaletDB()
+    private val prenotazioneDB = PrenotazioneDB()
+    private val chaletDB = ChaletDB()
 
     private val _prenotazione = MutableLiveData<Prenotazione>()
     val prenotazione: LiveData<Prenotazione>
