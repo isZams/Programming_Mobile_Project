@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.programming_mobile_project.MainActivity
 import com.example.programming_mobile_project.R
 import com.example.programming_mobile_project.models.Utente
@@ -80,6 +82,11 @@ class AuthFragment : Fragment() {
                 }
             }
         }
-    }
 
+        val btnAggiungi = view.findViewById<TextView>(R.id.addChalet)
+
+        btnAggiungi.setOnClickListener(){
+            view.findNavController().navigate(R.id.action_authFragment_to_uploadFragment)
+        }
+    }
 }

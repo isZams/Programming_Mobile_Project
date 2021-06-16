@@ -55,10 +55,6 @@ class ChaletFragment : Fragment() {
         binding.prenotaMensile.setOnClickListener {
             goToMappaOmbrelloni(30)
         }
-
-
-
-
         return binding.root
     }
 
@@ -107,7 +103,7 @@ class ChaletFragment : Fragment() {
 
 
     /**
-     * Dopo aver passato i due paremtri, viene lanciato un intent con cui apre GoogleMaps, msotrando
+     * Dopo aver passato i due paremtri, viene lanciato un intent con cui apre GoogleMaps, mostrando
      * il percorso per raggiungere la destinazione
      * Se non è presente un'app sul telefono per aprirla viene lanciato un intent con cui scaricare
      * l'applicazione da PlayStore.
@@ -233,7 +229,6 @@ class ChaletFragment : Fragment() {
             getAddress(mLastLocation.latitude, mLastLocation.longitude)
         }
     }
-
 
     /**
      * Prende come parametri latitudine e longitudine della posizione e li converte in un indirizzo

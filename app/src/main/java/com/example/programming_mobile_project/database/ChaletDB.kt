@@ -1,7 +1,6 @@
 package com.example.programming_mobile_project.database
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.programming_mobile_project.models.Chalet
@@ -52,7 +51,6 @@ class ChaletDB : FirebaseDB() {
         try {
             val response = chaletRef.add(chalet).await()
             id = response.id
-            Log.d("Deb", "id chalet caricato in ChaletDB" + id)
         } catch (e: Exception) {
         }
         return id
@@ -65,14 +63,19 @@ class ChaletDB : FirebaseDB() {
      */
     suspend fun uploadImage(image: Uri, nomeFile: String): String {
         var url = ""
-        if (nomeFile != "") {
-            val storage = Firebase.storage.reference
-            val imageRef = storage.child("images").child(nomeFile)
-            imageRef.putFile(image).await()
-            imageRef.downloadUrl.addOnSuccessListener {
-                url = it.toString()
+        try {
+            if (nomeFile != "") {
+                val storage = Firebase.storage.reference
+                val imageRef = storage.child("images").child(nomeFile)
+                imageRef.putFile(image).await()
+                imageRef.downloadUrl.addOnSuccessListener {
+                    url = it.toString()
+                    chaletRef.document(nomeFile).update("locandina", url)
+                }
             }
+        }finally {
+            return url
         }
-        return url
+
     }
 }

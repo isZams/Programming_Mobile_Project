@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.example.programming_mobile_project.login.AuthFragment"
-        android:label="AuthFragment" />
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginAuthFragment2"
         android:name="com.example.programming_mobile_project.login.LoginAuthFragment"
@@ -15,4 +19,8 @@
             android:id="@+id/action_loginAuthFragment2_to_authFragment"
             app:destination="@id/authFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.example.programming_mobile_project.chalet_admin.UploadFragment"
+        android:label="UploadFragment" />
 </navigation>
