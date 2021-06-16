@@ -12,7 +12,7 @@
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="118dp"
                 tools:layout_editor_absoluteY="73dp"
-                android:id="@+id/recyclerview"/>
+                android:id="@+id/recyclerview" />
 
     </FrameLayout>
 
