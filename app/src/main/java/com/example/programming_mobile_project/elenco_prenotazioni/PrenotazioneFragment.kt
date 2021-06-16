@@ -42,21 +42,24 @@ class PrenotazioneFragment : Fragment() {
     private val prenotazioneDB = PrenotazioneDB()
     private val chaletDB = ChaletDB()
 
-    private val observerChalet = Observer<Chalet> {
-        (activity as AppCompatActivity).supportActionBar?.title = it.nome_chalet
+    private val observerChalet = Observer<String> {
+        (activity as AppCompatActivity).supportActionBar?.title = it
     }
 
     private val observerPrenotazione = Observer<Prenotazione> {
-        binding.txtLettini.text = if(it.num_lettini.toString().isEmpty()) "0" else it.num_lettini.toString()
+        binding.txtLettini.text =
+            if (it.num_lettini.toString().isEmpty()) "0" else it.num_lettini.toString()
         binding.txtOmbrellone.text = it.n_ombrellone.toString()
-        binding.txtSdraio.text = if(it.num_sdraie.toString().isEmpty()) "0" else it.num_sdraie.toString()
-        binding.txtSedie.text = if(it.num_sedie.toString().isEmpty()) "0" else it.num_sedie.toString()
+        binding.txtSdraio.text =
+            if (it.num_sdraie.toString().isEmpty()) "0" else it.num_sdraie.toString()
+        binding.txtSedie.text =
+            if (it.num_sedie.toString().isEmpty()) "0" else it.num_sedie.toString()
         binding.txtDataEffettuata.text = it.timeStampToString(it.timestamp_prenotazione)
         binding.txtTerminePrenotazione.text = it.timeStampToString(it.data_termine_prenotazione)
         binding.txtTotale.text = it.tot.toString()
 
-        chaletDB.selectedChalet.observe(viewLifecycleOwner, observerChalet)
-        chaletDB.getChalet(it.key_chalet)
+        viewModel.nomeChalet.observe(viewLifecycleOwner, observerChalet)
+        viewModel.getNomeChalet(it.key_chalet)
     }
 
 

@@ -17,23 +17,19 @@ import kotlinx.coroutines.tasks.await
 class ChaletDB : FirebaseDB() {
     val chaletRef = db.collection("chalets")
 
-    val _selectedChalet = MutableLiveData<Chalet>()
-    val selectedChalet: LiveData<Chalet>
-        get() = _selectedChalet
-
     /**
      * Dato l'id dello chalet ritorna le info dello chalet corrispondente
      * @param chaletKey key dello chalet
      * @return Il valore ottenuto dalla query viene inserito nel LiveData selectedChalet. Se non viene trovato ritorna Chalet()
      */
-    fun getChalet(chaletKey: String) {
-        chaletRef
-            .document(chaletKey)
-            .get().addOnSuccessListener {
-                // toObject trasforma l'oggetto DocumentSnapshot! (it) in un oggetto della classe indicata
-                _selectedChalet.value = it.toObject<Chalet>()
-            }
-            .addOnFailureListener { _selectedChalet.value = Chalet() }
+    suspend fun getChalet(chaletKey: String): Chalet? {
+        return try {
+            chaletRef
+                .document(chaletKey)
+                .get().await().toObject()
+        } catch (e: Exception) {
+            null
+        }
     }
 
     //query che prende tutte le info di ogni chalet

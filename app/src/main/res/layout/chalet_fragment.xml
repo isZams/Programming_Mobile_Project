@@ -35,7 +35,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                    android:textSize="43sp"
+                    android:textSize="35dp"
+                    android:autoSizeMaxTextSize="35dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -64,7 +65,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
-                    android:textSize="20sp" />
+                    android:textSize="15sp"
+                    />
 
 
                 <TextView
@@ -78,95 +80,91 @@
 
 
                 <TableLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="@string/lettini"
-                            android:textAlignment="center" />
+                            android:text="@string/lettini" />
 
                         <TextView
                             android:id="@+id/tot_lettini"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
+                            android:layout_marginLeft="30dp"
                             android:textAlignment="center" />
                     </TableRow>
 
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="@string/ombrelloni"
-                            android:textAlignment="center" />
+                            android:text="@string/ombrelloni" />
 
                         <TextView
                             android:id="@+id/tot_ombrelloni"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
+                            android:layout_marginLeft="30dp"
                             android:textAlignment="center" />
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="@string/sdraio"
-                            android:textAlignment="center" />
+                            android:text="@string/sdraio" />
 
                         <TextView
                             android:id="@+id/tot_sdraio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
+                            android:layout_marginLeft="30dp"
                             android:textAlignment="center" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="@string/sedie"
-                            android:textAlignment="center" />
+                            android:text="@string/sedie" />
 
                         <TextView
                             android:id="@+id/tot_sedie"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="4dp"
+                            android:layout_marginLeft="30dp"
                             android:textAlignment="center" />
                     </TableRow>
 

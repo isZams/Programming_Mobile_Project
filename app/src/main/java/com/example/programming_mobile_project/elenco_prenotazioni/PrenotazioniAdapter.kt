@@ -3,18 +3,19 @@ package com.example.programming_mobile_project.elenco_prenotazioni
 import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.example.programming_mobile_project.database.ChaletDB
 import com.example.programming_mobile_project.database.PrenotazioneDB
 import com.example.programming_mobile_project.login.AuthViewModel
-import com.example.programming_mobile_project.models.Chalet
 import com.example.programming_mobile_project.models.Prenotazione
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestoreException
+import kotlinx.coroutines.launch
 
 val prenotazioneDB = PrenotazioneDB()
+
 val query = prenotazioneDB.queryPrenotazioniByUtente(AuthViewModel().uid()!!)
 
 /**
@@ -31,6 +32,8 @@ class PrenotazioniAdapter(
             .setLifecycleOwner(lifecycleOwner)
             .build()
     ) {
+
+    private val chaletDB = ChaletDB()
 
     override
     fun onCreateViewHolder(parent: ViewGroup, i: Int): PrenotazioniHolder {
@@ -51,12 +54,14 @@ class PrenotazioniAdapter(
             navController.navigate(action)
         }
 
-        val chaletDB = ChaletDB()
-        val observer = Observer<Chalet> {
-            holder.binding.nomeChalet.text = it.nome_chalet
+
+
+        lifecycleOwner.lifecycleScope.launch {
+            val chalet = chaletDB.getChalet(model.key_chalet)
+            if (chalet != null) {
+                holder.binding.nomeChalet.text = chalet.nome_chalet
+            }
         }
-        chaletDB.selectedChalet.observe(lifecycleOwner, observer)
-        chaletDB.getChalet(model.key_chalet)
     }
 
     override fun onError(e: FirebaseFirestoreException) {

@@ -5,15 +5,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_prenotation"
-            android:icon="@mipmap/ic_launcher_round"
+            android:icon="@drawable/ic_baseline_bookmark_border_24"
             android:title="Visualizza prenotazioni" />
         <item
             android:id="@+id/nav_update"
-            android:icon="@mipmap/ic_launcher_round"
+            android:icon="@drawable/ic_round_mode_edit_24"
             android:title="Modifica i tuoi dati" />
         <item
             android:id="@+id/logout"
-            android:icon="@mipmap/ic_launcher_round"
+            android:icon="@drawable/ic_round_logout_24"
             android:title="Logout" />
 
     </group>
