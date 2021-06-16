@@ -12,6 +12,7 @@ class UploadViewModel : ViewModel() {
 
     private val uri: Uri = "".toUri()
     private lateinit var image: Uri
+    private var imageSet = false
 
     /**
      * Inserisce localmente l'immagine per il successivo invio al database
@@ -19,6 +20,7 @@ class UploadViewModel : ViewModel() {
      */
     fun storeImage(image: Uri) {
         this.image = image
+        imageSet = true
     }
 
     /**
@@ -30,7 +32,9 @@ class UploadViewModel : ViewModel() {
         viewModelScope.launch {
             val db = ChaletDB()
             val id = db.addChalet(chalet)
-            val url = db.uploadImage(image, id)
+            if(imageSet == true){
+                db.uploadImage(image, id)
+            }
         }
         //TODO prendere l'url generato da firebase dell'immagine per metterlo dentro alla locandina
     }
